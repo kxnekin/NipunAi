@@ -1,7 +1,7 @@
 // routes/jobs.js
 const express = require("express");
 const router = express.Router();
-const Job = require("../models/Job"); // ✅ Correct import
+const Job = require("../models/Job"); // ✅ Make sure filename is exactly Job.js
 
 // GET all jobs
 router.get("/", async (req, res) => {

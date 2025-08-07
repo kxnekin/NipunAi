@@ -7,9 +7,11 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/your-db-name", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -21,9 +23,9 @@ mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/your-db-nam
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 
-// ✅ Job routes (🔻 Add this below auth routes)
-const jobRoutes = require("./routes/jobs");     // ✅ Add this
-app.use("/api/jobs", jobRoutes);                // ✅ Mount route
+// ✅ Job routes
+const jobRoutes = require("./routes/jobs");
+app.use("/api/jobs", jobRoutes);  // ✅ Mounted here
 
 // Health check route
 app.get("/", (req, res) => {

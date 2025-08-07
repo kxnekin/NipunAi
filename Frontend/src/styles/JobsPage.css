@@ -1,0 +1,59 @@
+/* Entire page container takes full screen */
+.jobs-page-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto; /* Enables scrolling inside this container */
+  padding: 2rem;
+  box-sizing: border-box;
+  background: radial-gradient(circle at 10% 20%, #1e1e1e, #000 100%);
+  font-family: 'Poppins', sans-serif;
+  color: #f9f9f9;
+}
+
+/* Optional: heading style */
+.job-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #f9f9f9;
+}
+
+/* Job card list (unstyled ul) */
+.job-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual job card styling */
+.job-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #000;
+}
+
+/* Apply Now button */
+.apply-button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Optional: custom scroll styles (if needed) */
+.jobs-page-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.jobs-page-container::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+}

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const CreateJob = () => {
   const navigate = useNavigate();
   const [jobData, setJobData] = useState({
     title: '',
     company: '',
+    ctc: '',            // ✅ Added CTC field in state
     location: '',
     description: '',
     eligibility: '',
@@ -16,14 +18,22 @@ const CreateJob = () => {
     setJobData({ ...jobData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // TODO: Replace with actual API POST request
-    console.log('Job Posted:', jobData);
+    try {
+      const response = await axios.post('http://localhost:5000/api/jobs', jobData);
 
-    alert('Job posted successfully!');
-    navigate('/admin-dashboard');
+      if (response.status === 200 || response.status === 201) {
+        alert('Job posted successfully!');
+        navigate('/admin-dashboard');
+      } else {
+        alert('Failed to post job.');
+      }
+    } catch (error) {
+      console.error('Error posting job:', error);
+      alert('Something went wrong while posting the job.');
+    }
   };
 
   return (
@@ -47,6 +57,14 @@ const CreateJob = () => {
           onChange={handleChange}
           style={styles.input}
           required
+        />
+        <input
+          type="text"
+          name="ctc"
+          placeholder="CTC (e.g., ₹6 LPA)"
+          value={jobData.ctc}
+          onChange={handleChange}
+          style={styles.input}
         />
         <input
           type="text"

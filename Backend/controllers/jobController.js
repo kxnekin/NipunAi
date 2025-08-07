@@ -1,4 +1,4 @@
-const Job = require('../models/Jobs');
+const Job = require('../models/Job');
 
 // POST - Admin creates job
 exports.createJob = async (req, res) => {

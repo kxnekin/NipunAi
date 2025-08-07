@@ -1,6 +1,7 @@
 // src/pages/StudentDashboard.js
 import React, { useEffect, useState } from 'react';
 import "../styles/StudentDashboard.css";
+import { useNavigate } from 'react-router-dom'; // ✅ Import this
 
 const features = [
   {
@@ -37,8 +38,7 @@ function StudentDashboard() {
     profilePic: 'https://via.placeholder.com/100',
   });
 
-  const [jobs, setJobs] = useState([]);
-  const [showJobs, setShowJobs] = useState(false);
+  const navigate = useNavigate(); // ✅ Navigation hook
 
   useEffect(() => {
     const name = localStorage.getItem('studentName');
@@ -49,17 +49,11 @@ function StudentDashboard() {
       name: name || 'Student',
       usn: email || 'Not Available',
     }));
-
-    // ✅ FIXED: Corrected fetch URL
-    fetch("http://localhost:5000/api/jobs")
-      .then(res => res.json())
-      .then(data => setJobs(data))
-      .catch(err => console.error("Error fetching jobs:", err));
   }, []);
 
   const handleExplore = (key) => {
     if (key === 'job') {
-      setShowJobs(true);
+      navigate('/jobs'); // ✅ Navigate to Jobs page
     } else {
       alert('Feature under development!');
     }
@@ -108,29 +102,6 @@ function StudentDashboard() {
             </div>
           ))}
         </div>
-
-        {/* Jobs Section */}
-        {showJobs && (
-          <div className="jobs-section">
-            <h2>Available Jobs</h2>
-            {jobs.length === 0 ? (
-              <p>No jobs posted yet by admin.</p>
-            ) : (
-              <ul className="job-list">
-                {jobs.map((job, index) => (
-                  <li key={index} className="job-card">
-                    <h3>{job.title}</h3>
-                    <p><strong>Company:</strong> {job.company}</p>
-                    <p><strong>CTC:</strong> {job.ctc}</p>
-                    <p><strong>Location:</strong> {job.location}</p>
-                    <p><strong>Skills:</strong> {job.skills}</p>
-                    <button className="apply-button">Apply Now</button>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )}
       </div>
     </>
   );
