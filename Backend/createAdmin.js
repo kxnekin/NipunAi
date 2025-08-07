@@ -28,4 +28,4 @@ async function createAdmin(name, email, plainPassword) {
 }
 
 // Test it
-createAdmin('Admin User', 'sam1@gmail.com', 'xyzzz'); // ✅ Now includes name
+createAdmin('Admin User', 'admin123@gmail.com', 'xyzzz'); // ✅ Now includes name

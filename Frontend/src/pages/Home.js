@@ -14,6 +14,7 @@ function Home() {
 
   const [index, setIndex] = useState(0);
 
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % messages.length);

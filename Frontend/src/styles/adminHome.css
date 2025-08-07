@@ -1,0 +1,64 @@
+.admin-home-wrapper {
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  background: linear-gradient(to right, #d3cce3, #e9e4f0);
+  min-height: 100vh;
+}
+
+.admin-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2e2e48;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.admin-logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.admin-nav-links .admin-nav-button {
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  margin-left: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.admin-nav-button:hover {
+  background-color: #574fd6;
+}
+
+.admin-cards-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.admin-card {
+  background-color: white;
+  color: #333;
+  padding: 20px;
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.admin-card h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
