@@ -1,26 +1,26 @@
-// Backend/routes/jobs.js
+// routes/jobs.js
 const express = require("express");
 const router = express.Router();
-const Job = require("../models/jobs");
+const Job = require("../models/Job"); // ✅ Correct import
 
-// POST /api/jobs/create → Admin creates a job
-router.post("/create", async (req, res) => {
+// GET all jobs
+router.get("/", async (req, res) => {
   try {
-    const newJob = new Job(req.body);
-    await newJob.save();
-    res.status(201).json({ message: "Job posted successfully!" });
+    const jobs = await Job.find();
+    res.json(jobs);
   } catch (err) {
-    res.status(500).json({ error: "Failed to post job" });
+    res.status(500).json({ error: err.message });
   }
 });
 
-// GET /api/jobs/all → Student sees all jobs
-router.get("/all", async (req, res) => {
+// POST new job
+router.post("/", async (req, res) => {
   try {
-    const jobs = await Job.find();
-    res.status(200).json(jobs);
+    const newJob = new Job(req.body);
+    await newJob.save();
+    res.status(201).json(newJob);
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch jobs" });
+    res.status(400).json({ error: err.message });
   }
 });
 
