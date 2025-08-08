@@ -35,6 +35,7 @@ function JobsPage() {
                 <p><strong>Company:</strong> {job.company}</p>
                 <p><strong>CTC:</strong> {job.ctc}</p>
                 <p><strong>Location:</strong> {job.location}</p>
+                <p><strong>Descrition:</strong>{job.description}</p>
                 <p><strong>Skills:</strong> {job.skills}</p>
                 <button className="apply-button">Apply Now</button>
               </li>

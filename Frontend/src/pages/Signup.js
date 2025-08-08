@@ -11,6 +11,9 @@ const Signup = () => {
   const [step, setStep] = useState('email'); // 'email', 'otp', 'complete'
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [usn, setUsn] = useState('');
+  const [branch, setBranch] = useState('');
+
 
   const backendUrl = 'http://localhost:5000/api/auth';
 
@@ -66,6 +69,9 @@ const Signup = () => {
         localStorage.setItem('studentName', `${firstName} ${lastName}`);
         localStorage.setItem('studentEmail', email);
         localStorage.setItem('studentRole', 'student');
+        localStorage.setItem('studentUSN', usn);
+        localStorage.setItem('studentBranch', branch);
+
       } else {
         setMessage(data.message || 'OTP verification failed');
       }
@@ -102,6 +108,26 @@ const Signup = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
+            <label htmlFor="usn" className="input-label">USN</label>
+            <input
+              id="usn"
+              type="text"
+              className="input-field"
+              placeholder="e.g., 1JT21CS001"
+              value={usn}
+              onChange={(e) => setUsn(e.target.value)}
+            />
+
+            <label htmlFor="branch" className="input-label">Branch</label>
+            <input
+              id="branch"
+              type="text"
+              className="input-field"
+              placeholder="e.g., Computer Science"
+              value={branch}
+              onChange={(e) => setBranch(e.target.value)}
+            />
+
 
             <label htmlFor="email" className="input-label">Email Address</label>
             <input

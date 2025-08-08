@@ -1,32 +1,26 @@
 // src/pages/StudentDashboard.js
 import React, { useEffect, useState } from 'react';
-import "../styles/StudentDashboard.css";
-import { useNavigate } from 'react-router-dom'; // ✅ Import this
+import '../styles/StudentDashboard.css';
+import { useNavigate } from 'react-router-dom';
 
 const features = [
   {
     icon: '💼',
-    title: 'One-click Job Apply',
-    description: 'Apply instantly to campus jobs using your uploaded resume.',
+    title: 'Job Apply',
+    description: 'Find and apply for jobs',
     key: 'job',
   },
   {
-    icon: '🧠',
-    title: 'AI-Powered Interview Prep',
-    description: 'Train for HR & personal interviews with our smart AI assistant.',
-    key: 'interview',
-  },
-  {
     icon: '💻',
-    title: 'Coding Platform',
-    description: 'Practice coding and get instant feedback & improvement tips.',
+    title: 'Coding Practice',
+    description: 'Improve coding with guided practice',
     key: 'coding',
   },
   {
-    icon: '📊',
-    title: 'Personalised Dashboard',
-    description: 'Track your placement progress with real-time stats.',
-    key: 'dashboard',
+    icon: '🧠',
+    title: 'AI Interview Prep',
+    description: 'Prepare for interviews with AI tools',
+    key: 'interview',
   },
 ];
 
@@ -35,75 +29,118 @@ function StudentDashboard() {
     name: 'Student',
     usn: 'Not Available',
     branch: 'Computer Science',
-    profilePic: 'https://via.placeholder.com/100',
   });
 
-  const navigate = useNavigate(); // ✅ Navigation hook
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const name = localStorage.getItem('studentName');
     const email = localStorage.getItem('studentEmail');
+    const usn = localStorage.getItem('studentUSN');
+    const branch = localStorage.getItem('studentBranch');
 
     setStudent(prev => ({
       ...prev,
       name: name || 'Student',
-      usn: email || 'Not Available',
+      usn: usn || email || 'Not Available',
+      branch: branch || 'Computer Science',
     }));
   }, []);
 
   const handleExplore = (key) => {
-    if (key === 'job') {
-      navigate('/jobs'); // ✅ Navigate to Jobs page
-    } else {
-      alert('Feature under development!');
+    if (key === 'job') navigate('/jobs');
+    else alert('Feature under development!');
+  };
+
+  const toggleProfileMenu = () => {
+    setShowProfileMenu(!showProfileMenu);
+  };
+
+  const handleProfileOptionClick = (option) => {
+    switch (option) {
+      case 'upload':
+        alert('Upload Resume clicked!');
+        break;
+      case 'view':
+        alert('View Profile clicked!');
+        break;
+      case 'edit':
+        alert('Edit Profile clicked!');
+        break;
+      case 'logout':
+        alert('Logout clicked!');
+        break;
+      default:
+        break;
     }
+    setShowProfileMenu(false);
   };
 
   return (
-    <>
-      <nav className="navbar">
-        <div className="logo">Nipun AI</div>
-        <ul className="nav-links">
-          <li><a href="#apply">Job Apply</a></li>
-          <li><a href="#interview">Interview Prep</a></li>
-          <li><a href="#coding">Coding</a></li>
-          <li><a href="#dashboard">Dashboard</a></li>
-        </ul>
-      </nav>
+    <div className="dashboard-wrapper">
+      {/* Sidebar */}
+      <div className="sidebar">
+        <div className="sidebar-icon">🏠</div>
 
-      <div className="dashboard-container">
-        <div className="profile-section">
-          <img
-            src={student.profilePic}
-            alt={`${student.name}'s profile`}
-            className="profile-pic"
-          />
-          <div className="profile-info">
-            <h2>Welcome, {student.name}!</h2>
-            <p><strong>Email (USN):</strong> {student.usn}</p>
-            <p><strong>Branch:</strong> {student.branch}</p>
+        <div className="sidebar-icon profile-icon-wrapper" onClick={toggleProfileMenu}>
+          👤
+          {showProfileMenu && (
+            <div className="profile-menu">
+              <div onClick={() => handleProfileOptionClick('upload')}>📄 Upload Resume</div>
+
+              <div onClick={() => handleProfileOptionClick('logout')}>🚪 Logout</div>
+            </div>
+          )}
+        </div>
+
+        <div className="sidebar-icon">📋</div>
+        <div className="sidebar-icon">⚙️</div>
+      </div>
+
+      {/* Main content */}
+      <div className="dashboard-content">
+        <h1 className="main-title">Student Dashboard</h1>
+
+        <div className="top-section">
+          {/* Profile Card */}
+          <div className="profile-card">
+            <div className="profile-icon">👤</div>
+            <h2>{student.name}</h2>
+            <p>{student.usn}</p>
+            <p>{student.branch}</p>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="quick-stats">
+            <div className="stat">
+              <h3>5</h3>
+              <p>Applied Jobs</p>
+            </div>
+            <div className="stat">
+              <h3>2</h3>
+              <p>Tests Given</p>
+            </div>
+            <div className="stat">
+              <h3>1</h3>
+              <p>Interview Calls</p>
+            </div>
           </div>
         </div>
 
-        <h1 className="dashboard-title">Your Dashboard</h1>
-
-        <div className="features-grid">
-          {features.map((feature, index) => (
-            <div className="feature-card" key={index}>
+        {/* Feature Cards */}
+        <div className="features">
+          {features.map((feature, idx) => (
+            <div className="feature" key={idx}>
               <div className="feature-icon">{feature.icon}</div>
-              <h2 className="feature-title">{feature.title}</h2>
-              <p className="feature-description">{feature.description}</p>
-              <button
-                className="explore-button"
-                onClick={() => handleExplore(feature.key)}
-              >
-                Explore
-              </button>
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+              <button onClick={() => handleExplore(feature.key)}>Explore</button>
             </div>
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
