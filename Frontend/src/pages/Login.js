@@ -6,7 +6,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);  // <-- New state
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const backendUrl = 'http://localhost:5000/api/auth';
@@ -30,6 +30,15 @@ const Login = () => {
       if (res.ok) {
         setMessage('Login successful!');
         console.log('User logged in:', data);
+
+        // ✅ Save user info in localStorage
+        localStorage.setItem("studentName", data.name);
+        localStorage.setItem("studentEmail", data.email);
+        localStorage.setItem("studentRole", data.role);
+
+        // If you later add USN/branch in backend response:
+        if (data.usn) localStorage.setItem("studentUSN", data.usn);
+        if (data.branch) localStorage.setItem("studentBranch", data.branch);
 
         if (data.role === 'admin') {
           navigate('/admin-dashboard');
@@ -56,11 +65,11 @@ const Login = () => {
       />
       <div style={{ position: 'relative' }}>
         <input
-          type={showPassword ? 'text' : 'password'}  // <-- Toggle type
+          type={showPassword ? 'text' : 'password'}
           placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ paddingRight: '80px' }} // to make space for button
+          style={{ paddingRight: '80px' }}
         />
         <button
           type="button"

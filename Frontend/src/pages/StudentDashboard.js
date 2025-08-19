@@ -1,75 +1,75 @@
-// src/pages/StudentDashboard.js
-import React, { useEffect, useState } from 'react';
-import '../styles/StudentDashboard.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import "../styles/StudentDashboard.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const features = [
-  {
-    icon: '💼',
-    title: 'Job Apply',
-    description: 'Find and apply for jobs',
-    key: 'job',
-  },
-  {
-    icon: '💻',
-    title: 'Coding Practice',
-    description: 'Improve coding with guided practice',
-    key: 'coding',
-  },
-  {
-    icon: '🧠',
-    title: 'AI Interview Prep',
-    description: 'Prepare for interviews with AI tools',
-    key: 'interview',
-  },
+  { icon: "💼", title: "Job Apply", description: "Find and apply for jobs", key: "job" },
+  { icon: "💻", title: "Coding Practice", description: "Sharpen coding skills", key: "coding" },
+  { icon: "🧠", title: "AI Interview Prep", description: "Practice mock interviews with AI", key: "interview" },
 ];
 
 function StudentDashboard() {
   const [student, setStudent] = useState({
-    name: 'Student',
-    usn: 'Not Available',
-    branch: 'Computer Science',
+    name: "Student",
+    usn: "Not Available",
+    branch: "Computer Science",
+    email: "",
   });
-
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [resume, setResume] = useState(null);
+
   const navigate = useNavigate();
 
+  // ✅ On page load → fetch student info + resume
   useEffect(() => {
-    const name = localStorage.getItem('studentName');
-    const email = localStorage.getItem('studentEmail');
-    const usn = localStorage.getItem('studentUSN');
-    const branch = localStorage.getItem('studentBranch');
+    const name = localStorage.getItem("studentName");
+    const email = localStorage.getItem("studentEmail");
+    const usn = localStorage.getItem("studentUSN");
+    const branch = localStorage.getItem("studentBranch");
 
-    setStudent(prev => ({
-      ...prev,
-      name: name || 'Student',
-      usn: usn || email || 'Not Available',
-      branch: branch || 'Computer Science',
-    }));
+    setStudent({
+      name: name || "Student",
+      usn: usn || "Not Available",
+      email: email || "Not Available",
+      branch: branch || "Computer Science",
+    });
+
+    if (email) {
+      axios
+        .get("http://localhost:5000/api/resume", {
+          headers: { "user-email": email },
+          responseType: "arraybuffer",
+        })
+        .then((res) => {
+          const blob = new Blob([res.data], { type: res.headers["content-type"] });
+          const fileUrl = URL.createObjectURL(blob);
+          setResume(fileUrl);
+          localStorage.setItem("studentResume", fileUrl);
+        })
+        .catch(() => {}); // no resume uploaded yet
+    }
   }, []);
 
   const handleExplore = (key) => {
-    if (key === 'job') navigate('/jobs');
-    else alert('Feature under development!');
+    if (key === "job") navigate("/jobs");
+    else alert("Feature under development!");
   };
 
-  const toggleProfileMenu = () => {
-    setShowProfileMenu(!showProfileMenu);
-  };
+  const toggleProfileMenu = () => setShowProfileMenu(!showProfileMenu);
 
   const handleProfileOptionClick = (option) => {
     switch (option) {
-      case 'upload':
-        alert('Upload Resume clicked!');
+      case "upload":
+        document.getElementById("resumeUpload").click();
         break;
-      case 'view':
-        alert('View Profile clicked!');
+      case "view":
+        if (resume) window.open(resume, "_blank");
+        else alert("No resume uploaded!");
         break;
-      case 'edit':
-        alert('Edit Profile clicked!');
-        break;
-      case 'logout':
-        alert('Logout clicked!');
+      case "logout":
+        localStorage.clear();
+        navigate("/login");
         break;
       default:
         break;
@@ -77,8 +77,59 @@ function StudentDashboard() {
     setShowProfileMenu(false);
   };
 
+  // ✅ Resume upload handler
+  const handleResumeUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file || file.type !== "application/pdf") {
+      alert("Please upload a PDF file.");
+      return;
+    }
+
+    const email = localStorage.getItem("studentEmail");
+    if (!email) {
+      alert("You must be logged in to upload a resume.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("resume", file);
+
+    try {
+      await axios.post("http://localhost:5000/api/resume/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "user-email": email,
+        },
+      });
+
+      alert("✅ Resume uploaded successfully!");
+
+      // Fetch again to show latest resume
+      const res = await axios.get("http://localhost:5000/api/resume", {
+        headers: { "user-email": email },
+        responseType: "arraybuffer",
+      });
+      const blob = new Blob([res.data], { type: res.headers["content-type"] });
+      const fileUrl = URL.createObjectURL(blob);
+      setResume(fileUrl);
+      localStorage.setItem("studentResume", fileUrl);
+    } catch (err) {
+      console.error(err);
+      alert("❌ Error uploading resume.");
+    }
+  };
+
   return (
     <div className="dashboard-wrapper">
+      {/* Hidden file input */}
+      <input
+        type="file"
+        id="resumeUpload"
+        style={{ display: "none" }}
+        onChange={handleResumeUpload}
+        accept="application/pdf"
+      />
+
       {/* Sidebar */}
       <div className="sidebar">
         <div className="sidebar-icon">🏠</div>
@@ -87,9 +138,9 @@ function StudentDashboard() {
           👤
           {showProfileMenu && (
             <div className="profile-menu">
-              <div onClick={() => handleProfileOptionClick('upload')}>📄 Upload Resume</div>
-
-              <div onClick={() => handleProfileOptionClick('logout')}>🚪 Logout</div>
+              <div onClick={() => handleProfileOptionClick("upload")}>📄 Upload Resume</div>
+              <div onClick={() => handleProfileOptionClick("view")}>👀 View Resume</div>
+              <div onClick={() => handleProfileOptionClick("logout")}>🚪 Logout</div>
             </div>
           )}
         </div>
@@ -107,24 +158,16 @@ function StudentDashboard() {
           <div className="profile-card">
             <div className="profile-icon">👤</div>
             <h2>{student.name}</h2>
-            <p>{student.usn}</p>
-            <p>{student.branch}</p>
-          </div>
+            <p><b>USN:</b> {student.usn}</p>
+            <p><b>Email:</b> {student.email}</p>
+            <p><b>Branch:</b> {student.branch}</p>
 
-          {/* Quick Stats */}
-          <div className="quick-stats">
-            <div className="stat">
-              <h3>5</h3>
-              <p>Applied Jobs</p>
-            </div>
-            <div className="stat">
-              <h3>2</h3>
-              <p>Tests Given</p>
-            </div>
-            <div className="stat">
-              <h3>1</h3>
-              <p>Interview Calls</p>
-            </div>
+            {/* Show Resume in profile */}
+            {resume ? (
+              <embed src={resume} width="400" height="300" type="application/pdf" />
+            ) : (
+              <p>No resume uploaded</p>
+            )}
           </div>
         </div>
 

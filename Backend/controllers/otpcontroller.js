@@ -1,50 +1,23 @@
-// controllers/otpController.js
-const nodemailer = require('nodemailer');
+const otpStore = {}; // In-memory store for OTPs
 const User = require('../models/user');
-require('dotenv').config();
 
-const otpStore = {}; // Temporary in-memory store
-
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
+// Send OTP
 exports.sendOtp = async (req, res) => {
   const { email } = req.body;
-  if (!email) {
-    return res.status(400).json({ message: 'Email is required' });
-  }
+  if (!email) return res.status(400).json({ message: 'Email is required' });
 
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
-  const expiresAt = Date.now() + 5 * 60 * 1000; // 5 minutes
+  otpStore[email] = { otp, expiresAt: Date.now() + 5 * 60 * 1000 }; // 5 min expiry
 
-  otpStore[email] = { otp, expiresAt };
-
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: 'Your OTP Code',
-    text: `Your OTP code is ${otp}. It will expire in 5 minutes.`,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-    console.log(`OTP sent to ${email}: ${otp}`);
-    res.json({ message: 'OTP sent successfully' });
-  } catch (error) {
-    console.error('Error sending OTP:', error);
-    res.status(500).json({ message: 'Failed to send OTP' });
-  }
+  console.log(`OTP for ${email}: ${otp}`); // For testing, remove in production
+  res.json({ message: 'OTP sent successfully' });
 };
 
+// Verify OTP & create user
 exports.verifyOtp = async (req, res) => {
-  const { email, otp, password, role, name } = req.body;
+  const { email, otp, password, role, name, usn, branch } = req.body;
 
-  if (!email || !otp || !password || !name) {
+  if (!email || !otp || !password || !name || !usn || !branch) {
     return res.status(400).json({ message: 'Missing required fields' });
   }
 
@@ -77,6 +50,8 @@ exports.verifyOtp = async (req, res) => {
       email,
       password,
       role: role || 'student',
+      usn,
+      branch,
     });
 
     await newUser.save();

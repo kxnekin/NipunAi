@@ -25,11 +25,15 @@ app.use("/api/auth", authRoutes);
 
 // ✅ Job routes
 const jobRoutes = require("./routes/jobs");
-app.use("/api/jobs", jobRoutes);  // ✅ Mounted here
+app.use("/api/jobs", jobRoutes);
+
+// ✅ Resume routes
+const resumeRoutes = require("./routes/resume");
+app.use("/api/resume", resumeRoutes);
 
 // Health check route
 app.get("/", (req, res) => {
-  res.send("Backend is running. Use /api/auth or /api/jobs endpoints.");
+  res.send("Backend is running. Use /api/auth, /api/jobs, or /api/resume endpoints.");
 });
 
 // Start server

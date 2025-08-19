@@ -7,33 +7,12 @@ const User = require('../models/user');
 router.post('/send-otp', otpController.sendOtp);
 router.post('/verify-otp', otpController.verifyOtp);
 
-// Register
-router.post('/register', async (req, res) => {
-  const { name, email, password, role } = req.body;
-
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: 'Name, email, and password are required' });
-  }
-
-  try {
-    const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(409).json({ message: 'Email already exists' });
-
-    const newUser = new User({ name, email, password, role });
-    await newUser.save();
-
-    res.status(201).json({ message: 'User registered successfully' });
-  } catch (err) {
-    console.error('Register error:', err);
-    res.status(500).json({ message: 'Server error during registration' });
-  }
-});
-
-// Login
+// Login route
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !password) return res.status(400).json({ message: 'Email and password are required' });
+  if (!email || !password)
+    return res.status(400).json({ message: 'Email and password are required' });
 
   try {
     const user = await User.findOne({ email });
@@ -47,6 +26,8 @@ router.post('/login', async (req, res) => {
       email: user.email,
       role: user.role,
       name: user.name,
+      usn: user.usn,
+      branch: user.branch,
     });
   } catch (err) {
     console.error('Login error:', err);
