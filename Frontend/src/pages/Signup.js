@@ -14,12 +14,11 @@ const Signup = () => {
   const [usn, setUsn] = useState('');
   const [branch, setBranch] = useState('');
 
-
   const backendUrl = 'http://localhost:5000/api/auth';
 
   const sendOtp = async () => {
-    if (!email || !firstName || !lastName) {
-      setMessage('Please enter your first name, last name, and email');
+    if (!email || !firstName || !lastName || !usn || !branch) {
+      setMessage('Please enter all required details');
       return;
     }
     setLoading(true);
@@ -58,6 +57,8 @@ const Signup = () => {
           password,
           role: 'student',
           name: `${firstName} ${lastName}`,
+          usn,       // ✅ Added
+          branch,    // ✅ Added
         }),
       });
       const data = await res.json();
@@ -71,7 +72,6 @@ const Signup = () => {
         localStorage.setItem('studentRole', 'student');
         localStorage.setItem('studentUSN', usn);
         localStorage.setItem('studentBranch', branch);
-
       } else {
         setMessage(data.message || 'OTP verification failed');
       }
@@ -108,6 +108,7 @@ const Signup = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
+
             <label htmlFor="usn" className="input-label">USN</label>
             <input
               id="usn"
@@ -127,7 +128,6 @@ const Signup = () => {
               value={branch}
               onChange={(e) => setBranch(e.target.value)}
             />
-
 
             <label htmlFor="email" className="input-label">Email Address</label>
             <input

@@ -17,7 +17,21 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: 'user', // You can make it 'admin' when needed
+    default: 'user', // can be 'student' or 'admin'
+  },
+  usn: {
+    type: String,
+    required: false,
+  },
+  branch: {
+    type: String,
+    required: false,
+  },
+
+  // ✅ Resume storage
+  resume: {
+    data: Buffer,
+    contentType: String,
   }
 });
 
