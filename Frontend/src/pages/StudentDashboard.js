@@ -162,9 +162,11 @@ function StudentDashboard() {
             <p><b>Email:</b> {student.email}</p>
             <p><b>Branch:</b> {student.branch}</p>
 
-            {/* Show Resume in profile */}
+            {/* ✅ Show Resume only as a link */}
             {resume ? (
-              <embed src={resume} width="400" height="300" type="application/pdf" />
+              <a href={resume} target="_blank" rel="noopener noreferrer">
+                📄ViewResume
+              </a>
             ) : (
               <p>No resume uploaded</p>
             )}
