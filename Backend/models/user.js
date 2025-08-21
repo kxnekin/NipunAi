@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+// Define resume sub-schema
+const resumeSchema = new mongoose.Schema({
+  data: Buffer,
+  contentType: String,
+}, { _id: false }); // _id false so MongoDB doesn’t create an ID for each resume object
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -28,12 +34,9 @@ const userSchema = new mongoose.Schema({
     required: false,
   },
 
-  // ✅ Resume storage
-  resume: {
-    data: Buffer,
-    contentType: String,
-  }
-});
+  // ✅ Resume storage (PDF in DB)
+  resume: resumeSchema,
+}, { timestamps: true });
 
 // Hash password before saving
 userSchema.pre('save', async function (next) {
