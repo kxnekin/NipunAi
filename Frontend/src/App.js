@@ -9,6 +9,9 @@ import StudentDashboard from './pages/StudentDashboard';
 import AdminDashboard from './pages/AdminHome';
 import CreateJob from './pages/Createjob';
 import JobsPage from './pages/Jobpage';
+import CodingPracticeLanding from "./pages/CodingPracticeLanding";
+import FundamentalsPage from "./pages/FundamentalsPage";
+import CodingPlayground from "./pages/CodingPlayground";
 
 import './App.css'; // Make sure global styles are applied
 
@@ -25,6 +28,9 @@ function App() {
           <Route path="/admin-dashboard/create" element={<CreateJob />} />
           <Route path="/create-job" element={<CreateJob />} />
           <Route path="/jobs" element={<JobsPage />} />
+          <Route path="/coding" element={<CodingPracticeLanding />} />
+          <Route path="/coding/fundamentals" element={<FundamentalsPage />} />
+          <Route path="/coding-playground/:id" element={<CodingPlayground />} />
         </Routes>
       </div>
     </Router>

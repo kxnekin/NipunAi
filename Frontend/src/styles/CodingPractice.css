@@ -1,0 +1,113 @@
+.coding-landing-wrapper {
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  background: linear-gradient(to right, #d3cce3, #e9e4f0);
+  min-height: 100vh;
+  text-align: center;
+}
+
+.coding-landing-wrapper .main-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #2e2e48;
+}
+
+.coding-landing-wrapper p {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.option-card {
+  background-color: white;
+  color: #333;
+  padding: 30px 20px;
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+.option-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.option-card h2 {
+  margin: 15px 0 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #2e2e48;
+}
+
+.option-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.option-card:first-child {
+  border-top: 4px solid #6c63ff;
+}
+
+.option-card:last-child {
+  border-top: 4px solid #574fd6;
+}
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.option-card {
+  background-color: white;
+  color: #333;
+  padding: 30px 20px;
+  width: 280px;  /* slightly smaller so 4 fit nicely */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.option-card {
+  background-color: white;
+  color: #333;
+  padding: 25px 20px;
+  width: 260px;   /* slightly reduced so 5 can align nicely */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+.admin-card {
+  background-color: white;
+  color: #333;
+  padding: 20px;
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center; /* ✅ ensures icons & text are centered */
+}
