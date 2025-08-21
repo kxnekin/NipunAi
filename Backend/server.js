@@ -27,13 +27,9 @@ app.use("/api/auth", authRoutes);
 const jobRoutes = require("./routes/jobs");
 app.use("/api/jobs", jobRoutes);
 
-// ✅ Resume routes
-const resumeRoutes = require("./routes/resume");
-app.use("/api/resume", resumeRoutes);
-
 // Health check route
 app.get("/", (req, res) => {
-  res.send("Backend is running. Use /api/auth, /api/jobs, or /api/resume endpoints.");
+  res.send("Backend is running. Use /api/auth or /api/jobs endpoints.");
 });
 
 // Start server
