@@ -1,0 +1,55 @@
+/* Main container: left question + right editor */
+.playground-container {
+  display: flex;
+  height: 100vh;
+  background: #f4f4f9; /* page background */
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Left panel: Question */
+.question-panel {
+  flex: 1;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  background: #ffffff; /* white background */
+  color: #2e2e48; /* dark text for readability */
+  overflow-y: auto; /* scroll if content is long */
+}
+
+.question-panel h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.question-panel p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Right panel: Code editor */
+.editor-panel {
+  flex: 2;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background: #1e1e2e; /* dark background */
+  color: #fff;
+}
+
+/* Run button */
+.run-button {
+  margin-top: 10px;
+  padding: 10px 16px;
+  background: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: flex-start;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+.run-button:hover {
+  background: #574fd6;
+}

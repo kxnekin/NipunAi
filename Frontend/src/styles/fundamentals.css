@@ -1,0 +1,65 @@
+.fundamentals-wrapper {
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  background: linear-gradient(to right, #d3cce3, #e9e4f0);
+  min-height: 100vh;
+}
+
+.fundamentals-wrapper h1 {
+  text-align: center;
+  color: #2e2e48;
+  margin-bottom: 10px;
+}
+
+.fundamentals-wrapper p {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 16px;
+  color: #444;
+}
+
+.questions-list {
+  width: 90%;
+  margin: 0 auto;
+  background: #bd6f6f;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+
+  /* Added for scrolling */
+  max-height: 500px;  /* adjust height as needed */
+  overflow-y: auto;   /* enable vertical scroll */
+  scrollbar-width: thin;  /* Firefox */
+  scrollbar-color: #7a4343 #f0f0f0; /* scrollbar color */
+}
+
+/* Optional - prettier scrollbar for Chrome/Edge/Safari */
+.questions-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.questions-list::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.questions-list::-webkit-scrollbar-thumb {
+  background-color: #7a4343;
+  border-radius: 10px;
+}
+
+.question-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #7a4343;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 16px;
+}
+
+.question-item:hover {
+  background: #9898ce;
+}
+
+.question-item:last-child {
+  border-bottom: none;
+}
