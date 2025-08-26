@@ -7,11 +7,11 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// ================= Middleware ================= //
 app.use(cors());
 app.use(bodyParser.json());
 
-// Connect to MongoDB
+// ================= MongoDB Connection ================= //
 mongoose
   .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/your-db-name")
   .then(() => console.log("✅ MongoDB connected"))
@@ -24,17 +24,14 @@ app.use("/api/auth", authRoutes);
 const jobRoutes = require("./routes/jobs");
 app.use("/api/jobs", jobRoutes);
 
-const resumeRoutes = require("./routes/resume"); // ✅ Always include
+const resumeRoutes = require("./routes/resume");
 app.use("/api/resume", resumeRoutes);
 
-// ========================================== //
+// ✅ Judge0 route (moved to its own file)
+const runRoutes = require("./routes/run");
+app.use("/api/run", runRoutes);
 
-// Health check route
-app.get("/", (req, res) => {
-  res.send("✅ Backend is running. Use /api/auth, /api/jobs, or /api/resume endpoints.");
-});
-
-// Start server
+// ================= Start Server ================= //
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
