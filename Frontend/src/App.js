@@ -13,6 +13,10 @@ import CodingPracticeLanding from "./pages/CodingPracticeLanding";
 import FundamentalsPage from "./pages/FundamentalsPage";
 import CodingPlayground from "./pages/CodingPlayground";
 
+// ✅ Added
+import InterviewLanding from "./pages/InterviewLanding";
+import InterviewSession from "./pages/InterviewSession";
+
 import './App.css'; // Make sure global styles are applied
 
 function App() {
@@ -31,6 +35,10 @@ function App() {
           <Route path="/coding" element={<CodingPracticeLanding />} />
           <Route path="/coding/fundamentals" element={<FundamentalsPage />} />
           <Route path="/coding-playground/:id" element={<CodingPlayground />} />
+
+          {/* ✅ Added */}
+          <Route path="/interview" element={<InterviewLanding />} />
+          <Route path="/interview/session" element={<InterviewSession />} />
         </Routes>
       </div>
     </Router>
