@@ -1,3 +1,4 @@
+// Backend/server.js
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -27,9 +28,17 @@ app.use("/api/jobs", jobRoutes);
 const resumeRoutes = require("./routes/resume");
 app.use("/api/resume", resumeRoutes);
 
-// ✅ Judge0 route (moved to its own file)
+// ✅ Code runner (Piston)
 const runRoutes = require("./routes/run");
 app.use("/api/run", runRoutes);
+
+// ✅ AI Interview sessions (added)
+const interviewRoutes = require("./routes/interview");
+app.use("/api/interview", interviewRoutes);
+
+app.get("/", (req, res) => {
+  res.send("Backend is running ✅. Use /api/... endpoints.");
+});
 
 // ================= Start Server ================= //
 app.listen(PORT, () => {
