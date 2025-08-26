@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/fundamentals.css";
 import { fundamentalQuestions } from "./data/questions";
+
 const FundamentalsPage = () => {
   const navigate = useNavigate();
 
@@ -17,7 +18,7 @@ const FundamentalsPage = () => {
             className="question-item"
             onClick={() => navigate(`/coding-playground/${q.id}`)}
           >
-            {q.id}. {q.title}
+            {q.id}. {q.title}.
           </div>
         ))}
       </div>

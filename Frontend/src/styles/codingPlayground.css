@@ -53,3 +53,14 @@
 .run-button:hover {
   background: #574fd6;
 }
+/* Output Section */
+.editor-panel pre {
+  margin-top: 10px;
+  background: #111;
+  color: #0f0;
+  padding: 10px;
+  border-radius: 6px;
+  white-space: pre-wrap; /* wrap lines if possible */
+  overflow-x: auto;      /* allow horizontal scroll if line too long */
+  max-height: 30vh;      /* optional: limit height for very long outputs */
+}
