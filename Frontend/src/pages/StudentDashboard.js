@@ -53,7 +53,8 @@ function StudentDashboard() {
 
   const handleExplore = (key) => {
     if (key === "job") navigate("/jobs");
-    else if (key === "coding") navigate("/coding"); // ✅ added navigation
+    else if (key === "coding") navigate("/coding");
+    else if (key === "interview") navigate("/interview"); // ✅ added navigation
     else alert("Feature under development!");
   };
 
