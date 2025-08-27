@@ -1,4 +1,4 @@
-// Backend/server.js
+// server.js
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -28,16 +28,13 @@ app.use("/api/jobs", jobRoutes);
 const resumeRoutes = require("./routes/resume");
 app.use("/api/resume", resumeRoutes);
 
-// ✅ Code runner (Piston)
 const runRoutes = require("./routes/run");
 app.use("/api/run", runRoutes);
 
-// ✅ AI Interview sessions (added)
-const interviewRoutes = require("./routes/interview");
-app.use("/api/interview", interviewRoutes);
-
-app.get("/", (req, res) => {
-  res.send("Backend is running ✅. Use /api/... endpoints.");
+// ✅ New LeetCode Questions Route
+const leetcodeQuestions = require("./leetcode-questions.json");
+app.get("/api/leetcode-questions", (req, res) => {
+  res.json(leetcodeQuestions);
 });
 
 // ================= Start Server ================= //

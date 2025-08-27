@@ -16,7 +16,7 @@ const FundamentalsPage = () => {
           <div
             key={q.id}
             className="question-item"
-            onClick={() => navigate(`/coding-playground/${q.id}`)}
+            onClick={() => navigate(`/coding/playground/${q.id}`)} // ✅ Fixed route
           >
             {q.id}. {q.title}.
           </div>

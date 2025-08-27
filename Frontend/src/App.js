@@ -12,19 +12,13 @@ import JobsPage from './pages/Jobpage';
 import CodingPracticeLanding from "./pages/CodingPracticeLanding";
 import FundamentalsPage from "./pages/FundamentalsPage";
 import CodingPlayground from "./pages/CodingPlayground";
-import LeetCodeQuestions from "./pages/LeetCodeQuestions";
-import LeetCodePlayground from "./pages/LeetCodePlayground";
+import LeetCodeQuestions from "./pages/LeetCodeQuestions"; // ✅ added
+
+// ✅ Added
 import InterviewLanding from "./pages/InterviewLanding";
 import InterviewSession from "./pages/InterviewSession";
 
 import './App.css';
-
-// ✅ Temporary hardcoded sample questions
-const sampleQuestions = [
-  { questionFrontendId: "1", title: "Two Sum", difficulty: "Easy", titleSlug: "two-sum" },
-  { questionFrontendId: "2", title: "Add Two Numbers", difficulty: "Medium", titleSlug: "add-two-numbers" },
-  { questionFrontendId: "3", title: "Longest Substring", difficulty: "Hard", titleSlug: "longest-substring-without-repeating-characters" },
-];
 
 function App() {
   return (
@@ -47,12 +41,9 @@ function App() {
           <Route path="/coding" element={<CodingPracticeLanding />} />
           <Route path="/coding/fundamentals" element={<FundamentalsPage />} />
           <Route path="/coding/playground/:id" element={<CodingPlayground />} />
+          <Route path="/coding/leetcode" element={<LeetCodeQuestions />} /> {/* ✅ FIXED */}
 
-          {/* ✅ LeetCode Section */}
-          <Route path="/coding/leetcode" element={<LeetCodeQuestions questions={sampleQuestions} />} />
-          <Route path="/coding/leetcode/:slug" element={<LeetCodePlayground />} />
-
-          {/* ✅ Interview Section */}
+          {/* ✅ Added */}
           <Route path="/interview" element={<InterviewLanding />} />
           <Route path="/interview/session" element={<InterviewSession />} />
         </Routes>
