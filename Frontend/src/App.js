@@ -14,6 +14,8 @@ import FundamentalsPage from "./pages/FundamentalsPage";
 import CodingPlayground from "./pages/CodingPlayground";
 import LeetCodeQuestions from "./pages/LeetCodeQuestions";
 import LeetCodePlayground from "./pages/LeetCodePlayground";
+import InterviewLanding from "./pages/InterviewLanding";
+import InterviewSession from "./pages/InterviewSession";
 
 import './App.css';
 
@@ -49,6 +51,10 @@ function App() {
           {/* ✅ LeetCode Section */}
           <Route path="/coding/leetcode" element={<LeetCodeQuestions questions={sampleQuestions} />} />
           <Route path="/coding/leetcode/:slug" element={<LeetCodePlayground />} />
+
+          {/* ✅ Interview Section */}
+          <Route path="/interview" element={<InterviewLanding />} />
+          <Route path="/interview/session" element={<InterviewSession />} />
         </Routes>
       </div>
     </Router>
