@@ -29,14 +29,14 @@ function CodingPracticeLanding() {
         </div>
 
         {/* Coding Playground */}
-        <div
-          className="option-card"
-          onClick={() => handleNavigation("/coding/playground")}
-        >
-          💻
-          <h2>Coding Playground</h2>
-          <p>Pick a problem and solve it with a live coding editor</p>
-        </div>
+       <div
+        className="option-card"
+        onClick={() => handleNavigation("/coding/leetcode")}
+      >
+        💻
+      <h2>Coding Playground</h2>
+      <p>Pick a problem and solve it with a live coding editor</p>
+      </div>
 
         {/* Admin Roadmaps */}
         <div
