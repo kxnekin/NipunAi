@@ -12,7 +12,9 @@ import JobsPage from './pages/Jobpage';
 import CodingPracticeLanding from "./pages/CodingPracticeLanding";
 import FundamentalsPage from "./pages/FundamentalsPage";
 import CodingPlayground from "./pages/CodingPlayground";
-import LeetCodeQuestions from "./pages/LeetCodeQuestions"; // ✅ added
+import LeetCodeQuestions from "./pages/LeetCodeQuestions"; 
+import AdminRoadmaps from "./pages/AdminRoadmaps";
+import ViewJobCards from "./pages/ViewJobCards"; // ✅ Added missing import
 
 // ✅ Added
 import InterviewLanding from "./pages/InterviewLanding";
@@ -36,16 +38,18 @@ function App() {
           <Route path="/admin-dashboard/create" element={<CreateJob />} />
           <Route path="/create-job" element={<CreateJob />} />
           <Route path="/jobs" element={<JobsPage />} />
+          <Route path="/admin-dashboard/view" element={<ViewJobCards />} />
 
           {/* Coding Section */}
           <Route path="/coding" element={<CodingPracticeLanding />} />
           <Route path="/coding/fundamentals" element={<FundamentalsPage />} />
           <Route path="/coding/playground/:id" element={<CodingPlayground />} />
-          <Route path="/coding/leetcode" element={<LeetCodeQuestions />} /> {/* ✅ FIXED */}
+          <Route path="/coding/leetcode" element={<LeetCodeQuestions />} />
 
-          {/* ✅ Added */}
+          {/* Interview Section */}
           <Route path="/interview" element={<InterviewLanding />} />
           <Route path="/interview/session" element={<InterviewSession />} />
+          <Route path="/admin-dashboard/roadmaps" element={<AdminRoadmaps />} />
         </Routes>
       </div>
     </Router>

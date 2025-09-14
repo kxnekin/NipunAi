@@ -5,7 +5,7 @@ import axios from "axios";
 
 const features = [
   { icon: "💼", title: "Job Apply", description: "Find and apply for jobs", key: "job" },
-  { icon: "💻", title: "Coding Practice", description: "Sharpen coding skills", key: "coding" },
+  { icon: "💻", title: "Coding and resources", description: "Sharpen coding skills", key: "coding" },
   { icon: "🧠", title: "AI Interview Prep", description: "Practice mock interviews with AI", key: "interview" },
 ];
 

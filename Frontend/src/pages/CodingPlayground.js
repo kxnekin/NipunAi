@@ -9,34 +9,39 @@ const CodingPlayground = () => {
   const { id } = useParams();
   const question = fundamentalQuestions.find((q) => q.id === Number(id));
 
-  const [code, setCode] = useState("// Write your solution here");
+  const [code, setCode] = useState(
+    question ? question.starterCode : "// Write your solution here"
+  );
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [language, setLanguage] = useState("javascript"); // ✅ default JS
+  const [language, setLanguage] = useState("javascript"); // default JS
 
-  // Run Code
+  // Run Code with test cases
   const handleRun = async () => {
+    if (!question) return;
     setLoading(true);
     setOutput("Running...");
 
     try {
       const response = await axios.post("http://localhost:5000/api/run", {
         code,
-        input: question.input || "",
-        language, // ✅ match backend piston format
+        language,
+        testCases: question.testCases, // send test cases
       });
 
-      const result = response.data;
+      const { results } = response.data;
 
-      if (result.stdout) {
-        setOutput(result.stdout);
-      } else if (result.stderr) {
-        setOutput("Error:\n" + result.stderr);
-      } else if (result.output) {
-        setOutput(result.output);
-      } else {
-        setOutput("Unknown error. Try again.");
-      }
+      // Format results for display
+      let formatted = results
+        .map(
+          (r, i) =>
+            `Test ${i + 1}:\nInput: ${JSON.stringify(r.input)}\nExpected: ${JSON.stringify(
+              r.expected
+            )}\nGot: ${JSON.stringify(r.got)}\nResult: ${r.passed ? "✅ Passed" : "❌ Failed"}\n`
+        )
+        .join("\n");
+
+      setOutput(formatted);
     } catch (err) {
       console.error(err);
       setOutput("❌ Failed to run code.");
@@ -51,28 +56,52 @@ const CodingPlayground = () => {
 
   return (
     <div className="playground-container">
+      {/* LEFT PANEL: Question */}
       <div className="question-panel">
         <h2>{question.title}</h2>
         <p>{question.description}</p>
-        <p>INPUT : {question.input}</p>
-        <p>OUTPUT : {question.output}</p>
-        <p>EXAMPLES : {question.examples}</p>
+
+        <p>
+          <strong>Difficulty:</strong> {question.difficulty}
+        </p>
+        <p>
+          <strong>Tags:</strong>{" "}
+          {question.tags && question.tags.length > 0
+            ? question.tags.join(", ")
+            : "None"}
+        </p>
+
+        <h3>Examples:</h3>
+        {question.testCases && question.testCases.length > 0 ? (
+          question.testCases.map((tc, index) => (
+            <div key={index} style={{ marginBottom: "10px" }}>
+              <p>
+                <strong>Example {index + 1}:</strong>
+              </p>
+              <p>Input: {JSON.stringify(tc.input)}</p>
+              <p>Output: {JSON.stringify(tc.expectedOutput)}</p>
+            </div>
+          ))
+        ) : (
+          <p>No examples available.</p>
+        )}
       </div>
 
+      {/* RIGHT PANEL: Editor */}
       <div className="editor-panel">
-        {/* ✅ Language Selector */}
+        {/* Language Selector */}
         <select
           value={language}
           onChange={(e) => {
             setLanguage(e.target.value);
 
-            // ✅ Set default template code when language changes
+            // Set default starter code based on language
             if (e.target.value === "javascript") {
-              setCode("// JavaScript Example\nconsole.log('Hello JS!');");
+              setCode(question.starterCode || "// JavaScript solution");
             } else if (e.target.value === "python") {
-              setCode("# Python Example\nprint('Hello Python!')");
+              setCode("# Python solution\ndef solve():\n    pass");
             } else if (e.target.value === "cpp") {
-              setCode(`#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "Hello C++!" << endl;\n    return 0;\n}`);
+              setCode(`#include <iostream>\nusing namespace std;\n\nint main() {\n    // C++ solution\n    return 0;\n}`);
             }
           }}
           style={{ marginBottom: "10px", padding: "5px" }}
@@ -82,15 +111,16 @@ const CodingPlayground = () => {
           <option value="cpp">C++</option>
         </select>
 
-        {/* ✅ Monaco editor auto-updates language */}
+        {/* Monaco editor */}
         <Editor
           height="70vh"
-          language={language === "cpp" ? "cpp" : language} 
+          language={language === "cpp" ? "cpp" : language}
           value={code}
           onChange={(value) => setCode(value)}
           theme="vs-dark"
         />
 
+        {/* Run Button */}
         <button className="run-button" onClick={handleRun} disabled={loading}>
           {loading ? "Running..." : "Run Code"}
         </button>
