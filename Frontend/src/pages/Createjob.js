@@ -106,12 +106,12 @@ const CreateJob = () => {
 const styles = {
   container: {
     maxWidth: '600px',
-    margin: '60px auto',
-    background: '#1e1e2f',
+    margin: '20px auto',
+    background: '#535389ff',
     padding: '30px',
     borderRadius: '12px',
     color: 'white',
-    boxShadow: '0 0 12px rgba(255, 255, 255, 0.1)',
+    boxShadow: '0 0 12px rgba(120, 97, 97, 0.1)',
   },
   heading: {
     textAlign: 'center',
