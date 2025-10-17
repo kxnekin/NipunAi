@@ -1,204 +1,232 @@
-// src/pages/Signup.js
-import React, { useState } from 'react';
-import '../styles/home.css';
+import React, { useState } from "react";
+import "../styles/Signup.css";
+import authImage from "../images/image.png"; // same image as login
 
 const Signup = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [otp, setOtp] = useState('');
-  const [step, setStep] = useState('email'); // 'email', 'otp', 'complete'
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [usn, setUsn] = useState('');
-  const [branch, setBranch] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [otp, setOtp] = useState("");
+  const [usn, setUsn] = useState("");
+  const [branch, setBranch] = useState("");
 
-  const backendUrl = 'http://localhost:5000/api/auth';
+  const [step, setStep] = useState("email");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const backendUrl = "http://localhost:5000/api/auth";
 
   const sendOtp = async () => {
     if (!email || !firstName || !lastName || !usn || !branch) {
-      setMessage('Please enter all required details');
+      setMessage("Please fill all fields.");
       return;
     }
     setLoading(true);
     try {
       const res = await fetch(`${backendUrl}/send-otp`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
       const data = await res.json();
       if (res.ok) {
         setMessage(data.message);
-        setStep('otp');
+        setStep("otp");
       } else {
-        setMessage(data.message || 'Failed to send OTP');
+        setMessage(data.message || "Failed to send OTP");
       }
     } catch {
-      setMessage('Error sending OTP');
+      setMessage("Error sending OTP");
     }
     setLoading(false);
   };
 
   const verifyOtp = async () => {
     if (!otp || !password) {
-      setMessage('Please enter OTP and password');
+      setMessage("Please enter OTP and password.");
       return;
     }
     setLoading(true);
     try {
       const res = await fetch(`${backendUrl}/verify-otp`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
           otp,
           password,
-          role: 'student',
+          role: "student",
           name: `${firstName} ${lastName}`,
-          usn,       // ✅ Added
-          branch,    // ✅ Added
+          usn,
+          branch,
         }),
       });
       const data = await res.json();
       if (res.ok) {
-        setMessage('OTP verified! Signup complete.');
-        setStep('complete');
+        setMessage("✅ Signup complete! You can now login.");
+        setStep("complete");
 
-        // ✅ Store student data locally
-        localStorage.setItem('studentName', `${firstName} ${lastName}`);
-        localStorage.setItem('studentEmail', email);
-        localStorage.setItem('studentRole', 'student');
-        localStorage.setItem('studentUSN', usn);
-        localStorage.setItem('studentBranch', branch);
+        localStorage.setItem("studentName", `${firstName} ${lastName}`);
+        localStorage.setItem("studentEmail", email);
+        localStorage.setItem("studentRole", "student");
+        localStorage.setItem("studentUSN", usn);
+        localStorage.setItem("studentBranch", branch);
       } else {
-        setMessage(data.message || 'OTP verification failed');
+        setMessage(data.message || "OTP verification failed");
       }
     } catch {
-      setMessage('Error verifying OTP');
+      setMessage("Error verifying OTP");
     }
     setLoading(false);
   };
 
   return (
-    <div className="signup-wrapper">
-      <div className="auth-container">
-        <h2 className="title">Create your account</h2>
+    <div className="split-auth-page">
+      <div className="auth-box">
+        {/* Left Image Side */}
+        <div className="auth-left">
+          <img
+            src={authImage}
+            alt="Illustration"
+            className="auth-illustration"
+          />
+          
+        </div>
 
-        {step === 'email' && (
-          <>
-            <label htmlFor="firstName" className="input-label">First Name</label>
-            <input
-              id="firstName"
-              type="text"
-              className="input-field"
-              placeholder="First Name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              autoFocus
-            />
+        {/* Right Form Side */}
+        <div className="auth-right">
+          <div className="auth-card">
+            <h2 className="auth-title">Create your account</h2>
+            <p className="auth-subtitle">Sign up to access your dashboard</p>
 
-            <label htmlFor="lastName" className="input-label">Last Name</label>
-            <input
-              id="lastName"
-              type="text"
-              className="input-field"
-              placeholder="Last Name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
+            {/* Step 1: Email & Details */}
+            {step === "email" && (
+              <div className="auth-form fade-in">
+                <div className="input-group">
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </div>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </div>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    placeholder="USN"
+                    value={usn}
+                    onChange={(e) => setUsn(e.target.value)}
+                  />
+                </div>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    placeholder="Branch"
+                    value={branch}
+                    onChange={(e) => setBranch(e.target.value)}
+                  />
+                </div>
+                <div className="input-group">
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <button
+                  className="btn primary-btn"
+                  onClick={sendOtp}
+                  disabled={loading}
+                >
+                  {loading ? "Sending OTP..." : "Send OTP"}
+                </button>
+              </div>
+            )}
 
-            <label htmlFor="usn" className="input-label">USN</label>
-            <input
-              id="usn"
-              type="text"
-              className="input-field"
-              placeholder="e.g., 1JT21CS001"
-              value={usn}
-              onChange={(e) => setUsn(e.target.value)}
-            />
+            {/* Step 2: OTP Verification */}
+            {step === "otp" && (
+              <div className="auth-form fade-in">
+                <p className="info-text">
+                  OTP sent to <strong>{email}</strong>
+                </p>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    placeholder="Enter OTP"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
+                  />
+                </div>
+                <div className="input-group">
+                  <input
+                    type="password"
+                    placeholder="Create Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <button
+                  className="btn primary-btn"
+                  onClick={verifyOtp}
+                  disabled={loading}
+                >
+                  {loading ? "Verifying..." : "Verify & Signup"}
+                </button>
+                <button
+                  className="btn secondary-btn"
+                  onClick={() => {
+                    setStep("email");
+                    setOtp("");
+                    setMessage("");
+                  }}
+                >
+                  Change Email
+                </button>
+              </div>
+            )}
 
-            <label htmlFor="branch" className="input-label">Branch</label>
-            <input
-              id="branch"
-              type="text"
-              className="input-field"
-              placeholder="e.g., Computer Science"
-              value={branch}
-              onChange={(e) => setBranch(e.target.value)}
-            />
+            {/* Step 3: Complete */}
+            {step === "complete" && (
+              <div className="auth-form fade-in">
+                <p className="auth-message success">{message}</p>
+                <a href="/login" className="auth-link">
+                  Go to Login →
+                </a>
+              </div>
+            )}
 
-            <label htmlFor="email" className="input-label">Email Address</label>
-            <input
-              id="email"
-              type="email"
-              className="input-field"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            {/* Message */}
+            {message && step !== "complete" && (
+              <p
+                className={`auth-message ${
+                  message.includes("✅") ? "success" : "error"
+                }`}
+              >
+                {message}
+              </p>
+            )}
 
-            <button className="btn primary-btn" onClick={sendOtp} disabled={loading}>
-              {loading ? 'Sending OTP...' : 'Send OTP'}
-            </button>
-          </>
-        )}
-
-        {step === 'otp' && (
-          <>
-            <p className="info-text">OTP sent to <strong>{email}</strong></p>
-
-            <label htmlFor="otp" className="input-label">Enter OTP</label>
-            <input
-              id="otp"
-              type="text"
-              className="input-field"
-              placeholder="Enter OTP"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              autoFocus
-            />
-
-            <label htmlFor="password" className="input-label">Create Password</label>
-            <input
-              id="password"
-              type="password"
-              className="input-field"
-              placeholder="At least 6 characters"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-
-            <button className="btn primary-btn" onClick={verifyOtp} disabled={loading}>
-              {loading ? 'Verifying...' : 'Verify OTP & Signup'}
-            </button>
-
-            <button
-              className="btn link-btn"
-              onClick={() => {
-                setStep('email');
-                setOtp('');
-                setMessage('');
-              }}
-            >
-              Change Email
-            </button>
-          </>
-        )}
-
-        {step === 'complete' && (
-          <div className="complete-message">
-            <p className="success-text">{message}</p>
-            <p>
-              You can now <a href="/login" className="link">login</a>.
-            </p>
+            {/* Footer */}
+            {step !== "complete" && (
+              <p className="auth-footer">
+                Already have an account?{" "}
+                <a href="/login" className="auth-link">
+                  Log in
+                </a>
+              </p>
+            )}
           </div>
-        )}
-
-        {message && step !== 'complete' && (
-          <p className="error-text">{message}</p>
-        )}
+        </div>
       </div>
     </div>
   );
