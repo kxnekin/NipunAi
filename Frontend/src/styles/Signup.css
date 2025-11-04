@@ -1,30 +1,141 @@
-/* ---- Global Container ---- */
-.split-auth-page {
+.signup-wrapper {
+  position: relative;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(to right, #558095, #465a68);
+  background: linear-gradient(-45deg, #141e30, #2b2d42, #182848, #311847);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  overflow: hidden;
 }
 
-/* ---- Outer Box ---- */
+/* Background Animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Floating Orbs */
+.floating-orbs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.5;
+  animation: float 20s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+}
+
+.orb1 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(0, 198, 255, 0.6), transparent 70%);
+  top: 10%;
+  left: 8%;
+  animation-delay: 0s;
+}
+
+.orb2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(180, 100, 255, 0.5),
+    transparent 70%
+  );
+  bottom: 10%;
+  right: 10%;
+  animation-delay: 3s;
+}
+
+.orb3 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 100, 180, 0.4),
+    transparent 70%
+  );
+  top: 60%;
+  left: 45%;
+  animation-delay: 6s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, -40px) scale(1.05);
+  }
+  100% {
+    transform: translate(-40px, 40px) scale(1);
+  }
+}
+
+/* Floating Particles */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: particleMove linear infinite;
+  filter: blur(0.5px);
+}
+
+@keyframes particleMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(120px, -180px);
+  }
+  100% {
+    transform: translate(-120px, 180px);
+  }
+}
+
+/* Auth Box Styling (same as Login) */
 .auth-box {
   display: flex;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
-  width: 1100px; /* 🟢 increased width for a larger login box */
-  max-width: 95%;
-  height: 600px; /* 🟢 increased height */
-  transition: all 0.3s ease;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  width: 1250px; /* ⬅️ Increased width (from 1100px) */
+  max-width: 98%; /* ⬅️ Gives a bit more breathing space */
+  height: 680px; /* ⬅️ Slightly taller box */
+  position: relative;
+  z-index: 2;
 }
 
-/* ---- Left Image Section ---- */
 .auth-left {
-  flex: 1.2; /* 🟢 slightly more width for image side */
-  background-color: #f0f3fa;
-  position: relative;
+  flex: 1.2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,46 +147,31 @@
   object-fit: cover;
 }
 
-.overlay-text {
-  position: absolute;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  bottom: 30px;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.35);
-}
-
-/* ---- Right Form Section ---- */
 .auth-right {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
 }
 
 .auth-card {
-  background: white;
-  padding: 3.5rem 4rem; /* 🟢 larger padding */
+  background: rgba(15, 20, 35, 0.95);
+  padding: 3rem 3.5rem;
   border-radius: 20px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-  width: 500px; /* 🟢 increased form width */
+  width: 500px;
   max-width: 90%;
   text-align: center;
+  box-shadow: 0px 10px 30px rgba(0, 198, 255, 0.2);
 }
 
 .auth-title {
-  font-size: 2rem; /* 🟢 larger heading */
+  font-size: 2rem;
   margin-bottom: 10px;
-  color: #333;
+  color: #fff;
 }
 
 .auth-subtitle {
-  color: #666;
+  color: #ccc;
   font-size: 1rem;
   margin-bottom: 30px;
 }
@@ -90,33 +186,28 @@
   font-size: 1rem;
   display: block;
   margin-bottom: 5px;
-  color: #444;
+  color: #ddd;
 }
 
 .input-group input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #555;
   border-radius: 8px;
   font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #94b48b;
+  outline: none;
 }
 
-.password-group {
-  position: relative;
-}
-
-.toggle-password {
-  position: absolute;
-  right: 10px;
-  top: 38px;
-  cursor: pointer;
-  font-size: 1.1rem;
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .btn.primary-btn {
   width: 100%;
   padding: 12px;
-  background-color: #4a90e2;
+  background: linear-gradient(90deg, #00c6ff, #8f8fff);
   border: none;
   border-radius: 8px;
   color: white;
@@ -124,16 +215,12 @@
   font-weight: 600;
   cursor: pointer;
   margin-top: 10px;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .btn.primary-btn:hover {
-  background-color: #3b7fc9;
-}
-
-.btn.primary-btn:disabled {
-  background-color: #9abce7;
-  cursor: not-allowed;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 198, 255, 0.4);
 }
 
 .auth-message {
@@ -152,16 +239,15 @@
 .auth-footer {
   margin-top: 20px;
   font-size: 0.9rem;
-  color: #555;
+  color: #ccc;
 }
 
 .auth-link {
-  color: #4a90e2;
-  text-decoration: none;
+  color: #00c6ff;
   font-weight: 600;
 }
 
-/* ---- Responsive ---- */
+/* Responsive */
 @media (max-width: 900px) {
   .auth-box {
     flex-direction: column;
@@ -172,27 +258,119 @@
   .auth-left {
     height: 250px;
   }
+}
+/* ===== WRAPPER ===== */
+.login-wrapper {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(-45deg, #141e30, #2b2d42, #182848, #311847);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  overflow: hidden;
+}
 
-  .auth-right {
-    padding: 30px 20px;
+/* Background Animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
   }
-
-  .auth-card {
-    width: 100%;
-    padding: 2.5rem;
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
-.fade-in {
-  animation: fadeIn 0.4s ease-in-out;
+
+/* Floating Orbs */
+.floating-orbs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.5;
+  animation: float 20s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+}
+.orb1 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(0, 198, 255, 0.6), transparent 70%);
+  top: 10%;
+  left: 8%;
+  animation-delay: 0s;
+}
+.orb2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(180, 100, 255, 0.5),
+    transparent 70%
+  );
+  bottom: 10%;
+  right: 10%;
+  animation-delay: 3s;
+}
+.orb3 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 100, 180, 0.4),
+    transparent 70%
+  );
+  top: 60%;
+  left: 45%;
+  animation-delay: 6s;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  50% {
+    transform: translate(40px, -40px) scale(1.05);
+  }
+  100% {
+    transform: translate(-40px, 40px) scale(1);
+  }
+}
+
+/* Floating Particles */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: particleMove linear infinite;
+  filter: blur(0.5px);
+}
+@keyframes particleMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(120px, -180px);
+  }
+  100% {
+    transform: translate(-120px, 180px);
   }
 }

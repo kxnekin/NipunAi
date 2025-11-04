@@ -14,6 +14,7 @@ const Signup = () => {
   const [step, setStep] = useState("email");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const backendUrl = "http://localhost:5000/api/auth";
 
@@ -82,25 +83,42 @@ const Signup = () => {
   };
 
   return (
-    <div className="split-auth-page">
-      <div className="auth-box">
-        {/* Left Image Side */}
-        <div className="auth-left">
-          <img
-            src={authImage}
-            alt="Illustration"
-            className="auth-illustration"
+    <div className="login-wrapper">
+      {/* Floating Orbs */}
+      <div className="floating-orbs">
+        <div className="orb orb1"></div>
+        <div className="orb orb2"></div>
+        <div className="orb orb3"></div>
+      </div>
+
+      {/* Floating Particles */}
+      <div className="particles">
+        {Array.from({ length: 40 }).map((_, i) => (
+          <div
+            key={i}
+            className="particle"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 20}s`,
+              animationDuration: `${10 + Math.random() * 20}s`,
+            }}
           />
-          
+        ))}
+      </div>
+
+      <div className="auth-box">
+        {/* Left Image Panel */}
+        <div className="auth-left">
+          <img src={authImage} alt="Illustration" className="auth-illustration" />
         </div>
 
-        {/* Right Form Side */}
+        {/* Right Form Panel */}
         <div className="auth-right">
           <div className="auth-card">
             <h2 className="auth-title">Create your account</h2>
             <p className="auth-subtitle">Sign up to access your dashboard</p>
 
-            {/* Step 1: Email & Details */}
             {step === "email" && (
               <div className="auth-form fade-in">
                 <div className="input-group">
@@ -153,7 +171,6 @@ const Signup = () => {
               </div>
             )}
 
-            {/* Step 2: OTP Verification */}
             {step === "otp" && (
               <div className="auth-form fade-in">
                 <p className="info-text">
@@ -167,13 +184,19 @@ const Signup = () => {
                     onChange={(e) => setOtp(e.target.value)}
                   />
                 </div>
-                <div className="input-group">
+                <div className="input-group password-group">
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Create Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                  <span
+                    className="toggle-password"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? "🙈" : "👁️"}
+                  </span>
                 </div>
                 <button
                   className="btn primary-btn"
@@ -195,7 +218,6 @@ const Signup = () => {
               </div>
             )}
 
-            {/* Step 3: Complete */}
             {step === "complete" && (
               <div className="auth-form fade-in">
                 <p className="auth-message success">{message}</p>
@@ -205,7 +227,6 @@ const Signup = () => {
               </div>
             )}
 
-            {/* Message */}
             {message && step !== "complete" && (
               <p
                 className={`auth-message ${
@@ -216,13 +237,9 @@ const Signup = () => {
               </p>
             )}
 
-            {/* Footer */}
             {step !== "complete" && (
               <p className="auth-footer">
-                Already have an account?{" "}
-                <a href="/login" className="auth-link">
-                  Log in
-                </a>
+                Already have an account? <a href="/login" className="auth-link">Log in</a>
               </p>
             )}
           </div>
