@@ -1,4 +1,3 @@
-
 export function speak(text) {
   return new Promise((resolve) => {
     if (!("speechSynthesis" in window)) return resolve();
