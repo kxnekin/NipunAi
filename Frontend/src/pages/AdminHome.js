@@ -10,7 +10,6 @@ const AdminHome = () => {
       <nav className="admin-navbar">
         <div className="admin-logo">🛠️ Admin Dashboard</div>
         <div className="admin-nav-links">
-          
           <button
             onClick={() => navigate("/admin-dashboard/view")}
             className="admin-nav-button"
@@ -35,6 +34,13 @@ const AdminHome = () => {
           >
             Company-wise Resources
           </button>
+          {/* ✅ New Button */}
+          <button
+            onClick={() => navigate("/admin-dashboard/students")}
+            className="admin-nav-button"
+          >
+            👥 View Students
+          </button>
         </div>
       </nav>
 
@@ -46,8 +52,6 @@ const AdminHome = () => {
           <h2>➕ Add Job Card</h2>
           <p>Create and publish new job postings for users.</p>
         </div>
-
-        
 
         <div
           className="admin-card"
@@ -71,6 +75,15 @@ const AdminHome = () => {
         >
           <h2>🏢 Company Resources</h2>
           <p>Post company-specific interview questions and prep guides.</p>
+        </div>
+
+        {/* ✅ New Card */}
+        <div
+          className="admin-card"
+          onClick={() => navigate("/admin-dashboard/students")}
+        >
+          <h2>👥 View Students</h2>
+          <p>View list of all registered students and their profiles.</p>
         </div>
       </div>
     </div>

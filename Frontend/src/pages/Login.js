@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Login.css";
-import authImage from "../images/image.png"; // ✅ Correct import
+import authImage from "../images/image.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -30,35 +30,57 @@ const Login = () => {
 
       if (res.ok) {
         setMessage("Login successful!");
+
+        // ✅ Store everything under consistent keys
         localStorage.setItem("studentName", data.name);
         localStorage.setItem("studentEmail", data.email);
-        localStorage.setItem("studentRole", data.role);
-
+        localStorage.setItem("studentRole", data.role || "student");
         if (data.usn) localStorage.setItem("studentUSN", data.usn);
         if (data.branch) localStorage.setItem("studentBranch", data.branch);
 
-        navigate(data.role === "admin" ? "/admin-dashboard" : "/student-dashboard");
+        // ✅ Redirect
+        if (data.role === "admin") navigate("/admin-dashboard");
+        else navigate("/student-dashboard");
       } else {
         setMessage(data.message || "Invalid email or password");
       }
-    } catch {
+    } catch (error) {
+      console.error(error);
       setMessage("Error during login");
     }
     setLoading(false);
   };
 
   return (
-    <div className="split-auth-page">
-      <div className="auth-box"> {/* ✅ Added wrapper for compact box */}
+    <div className="login-wrapper">
+      {/* Floating Orbs */}
+      <div className="floating-orbs">
+        <div className="orb orb1"></div>
+        <div className="orb orb2"></div>
+        <div className="orb orb3"></div>
+      </div>
 
+      {/* Floating Particles */}
+      <div className="particles">
+        {Array.from({ length: 40 }).map((_, i) => (
+          <div
+            key={i}
+            className="particle"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 20}s`,
+              animationDuration: `${10 + Math.random() * 20}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Login Box */}
+      <div className="auth-box">
         {/* Left Image Panel */}
         <div className="auth-left">
-          <img
-            src={authImage}
-            alt="Illustration"
-            className="auth-illustration"
-          />
-          
+          <img src={authImage} alt="Illustration" className="auth-illustration" />
         </div>
 
         {/* Right Form Panel */}
@@ -121,8 +143,7 @@ const Login = () => {
             </div>
           </div>
         </div>
-
-      </div> {/* End of auth-box */}
+      </div>
     </div>
   );
 };

@@ -1,0 +1,73 @@
+.admin-dashboard-wrapper {
+  padding: 40px;
+  background-color: #f8f9fb;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+.admin-dashboard-header {
+  margin-bottom: 30px;
+}
+
+.admin-dashboard-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e1e2f;
+}
+
+.admin-dashboard-header p {
+  color: #555;
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.student-table th {
+  background: #2b2d42;
+  color: #fff;
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+}
+
+.student-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.student-table tr:hover {
+  background-color: #f4f6f8;
+  transition: 0.2s ease;
+}
+
+.no-data {
+  text-align: center;
+  color: #777;
+  font-size: 18px;
+  padding: 40px;
+}
+
+.delete-icon {
+  background: none;
+  border: none;
+  color: #e63946;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.download-icon {
+  color: #0077b6;
+  text-decoration: none;
+  margin-right: 8px;
+}
+
+.download-icon:hover,
+.delete-icon:hover {
+  opacity: 0.8;
+}

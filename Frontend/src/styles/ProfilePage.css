@@ -1,0 +1,284 @@
+.profile-wrapper {
+  width: 100%;
+  padding: 32px 48px;
+  background-color: var(--bg-color);
+  animation: fadeIn 0.5s ease-in-out;
+  padding-bottom: 6rem;
+  overflow-x: hidden;
+  /* overflow-y: auto; <-- This is handled by .dashboard-content now */
+  flex: 1;
+  height: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 24px;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+}
+
+.back-button:hover {
+  color: var(--primary-color);
+}
+
+.profile-header {
+  margin-bottom: 24px;
+}
+
+.profile-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.profile-header p {
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+/* --- NEW: Grid Layout --- */
+.profile-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 32px; /* Gap between all cards */
+  max-width: 1400px; /* Set a max width for the whole layout */
+  margin: 0 auto; /* Center the grid */
+}
+
+/* NEW: Rule to make the work-ex card span */
+.profile-card-full-width {
+  grid-column: 1 / -1; /* Spans from the first to the last column line */
+}
+
+/* --- Card Layout --- */
+/* REMOVED max-width and margin-auto from here */
+.profile-card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 32px;
+  box-shadow: var(--shadow-light);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  /* Ensures cards in the top row are the same height */
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-icon {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  color: white;
+  margin-bottom: 16px;
+}
+
+.profile-card h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+/* --- Info --- */
+.profile-info p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.profile-info p strong {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+/* --- REPLACED: File Upload (Matches Optimizer) --- */
+.file-upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.file-upload-label:hover {
+  border-color: var(--primary-color);
+  background-color: var(--bg-color);
+}
+
+.file-upload-label span {
+  color: var(--text-secondary);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resume-link {
+  display: inline-block;
+  margin-top: 16px;
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.resume-link:hover {
+  text-decoration: underline;
+}
+
+/* --- Work Experience --- */
+.work-exp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  padding: 16px;
+  background-color: var(--bg-color); /* Light background for inner card */
+}
+
+.work-exp-card input,
+.work-exp-card textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--card-bg); /* White background for inputs */
+  color: var(--text-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.work-exp-card input:focus,
+.work-exp-card textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 105, 189, 0.2);
+}
+
+.work-exp-card textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.work-exp-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto; /* Pushes buttons to the bottom of the card */
+}
+
+.add-btn,
+.save-btn {
+  padding: 12px 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-btn {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.add-btn:hover {
+  background-color: #17a589; /* Darker teal */
+  transform: translateY(-2px);
+}
+
+.save-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+.work-exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.work-exp-header h4 {
+  font-size: 16px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.delete-btn {
+  background-color: #fbeeee; /* Lighter red bg */
+  color: #e74c3c; /* Red text */
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: #e74c3c; /* Solid red on hover */
+  color: white;
+  transform: scale(1.05);
+}
+
+/* --- NEW: Responsive Grid --- */
+@media (max-width: 992px) {
+  .profile-layout-grid {
+    grid-template-columns: 1fr; /* Stack to one column */
+    gap: 24px; /* Adjust gap for vertical stacking */
+  }
+
+  .profile-wrapper {
+    padding: 24px; /* Reduce padding on smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-wrapper {
+    padding: 16px;
+  }
+  .profile-header h1 {
+    font-size: 28px;
+  }
+  .profile-header p {
+    font-size: 16px;
+  }
+  .profile-card {
+    padding: 24px;
+  }
+}
