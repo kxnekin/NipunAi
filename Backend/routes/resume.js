@@ -55,4 +55,40 @@ router.get("/", async (req, res) => {
   }
 });
 
+// ✅ Check if resume exists
+router.get("/status", async (req, res) => {
+  try {
+    const email = req.headers["user-email"];
+    if (!email) return res.status(400).json({ message: "User email is required in headers." });
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found." });
+
+    const hasResume = !!(user.resume && user.resume.data);
+    res.json({ hasResume });
+  } catch (err) {
+    console.error("Resume status error:", err);
+    res.status(500).json({ message: "Server error checking resume status." });
+  }
+});
+
+// ✅ Download resume by email (for admin view)
+router.get("/download/:email", async (req, res) => {
+  try {
+    const email = req.params.email;
+
+    const user = await User.findOne({ email });
+    if (!user || !user.resume || !user.resume.data) {
+      return res.status(404).json({ message: "No resume found for this user." });
+    }
+
+    res.set("Content-Type", user.resume.contentType);
+    res.set("Content-Disposition", `attachment; filename="${user.name}_resume.pdf"`);
+    res.send(user.resume.data);
+  } catch (err) {
+    console.error("Resume download error:", err);
+    res.status(500).json({ message: "Server error downloading resume." });
+  }
+});
+
 module.exports = router;
