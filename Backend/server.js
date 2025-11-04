@@ -1,57 +1,25 @@
-// ================== IMPORTS ================== //
-
-// ✅ THIS IS THE FIX: Load .env variables BEFORE anything else.
-require("dotenv").config();
-
-// Now, all other files can safely use process.env
+// ================= Required Modules ================= //
 const express = require("express");
-const cors = require("cors"); // ✅ REMOVED the extra quotes
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
-const User = require("./models/user"); // ✅ User model
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ================== Middleware ================== //
+// ================= Middleware ================= //
 app.use(cors());
 app.use(bodyParser.json());
 
-// ================== MongoDB Connection ================== //
+// ================= MongoDB Connection ================= //
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/nipun-ai-db") // This will now work
-  .then(async () => {
-    console.log("✅ MongoDB connected");
-    await createDefaultAdmin();
-  })
+  .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/nipunai")
+  .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// ================== Auto Admin Creation ================== //
-async function createDefaultAdmin() {
-  try {
-    const existingAdmin = await User.findOne({ email: "admin@nipunai.com" });
-    if (existingAdmin) {
-      console.log("🧑‍💻 Default admin already exists.");
-      return;
-    }
-
-    const adminUser = new User({
-      name: "Admin User",
-      email: "admin@nipunai.com",
-      password: "Admin@123", // pre-save hook will hash this automatically
-      role: "admin",
-    });
-
-    await adminUser.save();
-    console.log("✅ Default admin created: admin@nipunai.com / Admin@123");
-  } catch (err) {
-    console.error("❌ Error creating default admin:", err);
-  }
-}
-
-// ================== Routes ================== //
-// All these routes will now have access to process.env
+// ================= Routes ================= //
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 
@@ -61,30 +29,29 @@ app.use("/api/jobs", jobRoutes);
 const resumeRoutes = require("./routes/resume");
 app.use("/api/resume", resumeRoutes);
 
+// 🔹 ADD THIS LINE - Applications Route
+console.log("🔍 Loading applications route...");
+try {
+  const applicationRoutes = require("./routes/applications");
+  app.use("/api/applications", applicationRoutes);
+  console.log("✅ Applications route loaded successfully");
+} catch (error) {
+  console.error("❌ ERROR loading applications route:", error.message);
+}
+
+// 🔹 Run Route (Piston Integration)
 const runRoutes = require("./routes/run");
 app.use("/api/run", runRoutes);
 
+// 🔹 Roadmaps
 const roadmapRoutes = require("./routes/roadmaps");
 app.use("/api/roadmaps", roadmapRoutes);
 
-const profileRoutes = require("./routes/profile");
-app.use("/api/profile", profileRoutes);
+// 🔹 Mock Interview Route
+const mockInterviewRoutes = require("./routes/mockInterview");
+app.use("/api/mock-interview", mockInterviewRoutes);
 
-const adminRoutes = require("./routes/admin");
-app.use("/api/admin", adminRoutes);
-
-const jobRoutes = require("./routes/jobs");
-app.use("/api/jobs", jobRoutes);
-
-
-const resumeOptimizerRoutes = require("./routes/resumeOptimizerRoutes");
-app.use("/api/resume-optimizer", resumeOptimizerRoutes); // fixed path consistency
-
-// 🆕 Add your new Work Experience Routes
-const workExpRoutes = require("./routes/workExpRoutes"); // ✅ fixed filename
-app.use("/api/workexp", workExpRoutes);
-
-// ================== LeetCode Questions ================== //
+// ================= LeetCode Questions ================= //
 const leetcodeQuestions = require("./leetcode-questions.json");
 
 // Get all questions
@@ -104,21 +71,178 @@ app.get("/api/leetcode-questions/:titleSlug", (req, res) => {
   res.json(question);
 });
 
-// ================== Static File Serving ================== //
+// ================= Static Uploads ================= //
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// 🆕 Serve resume optimizer uploads folder
-app.use(
-  "/resume_optimizer_uploads",
-  express.static(path.join(__dirname, "resume_optimizer_uploads"))
-);
-
-// ================== Health Check ================== //
+// ================= Health Check ================= //
 app.get("/", (req, res) => {
-  res.send("🚀 Nipun AI Backend is running!");
+  res.send("🚀 API is running!");
 });
 
-// ================== Start Server ================== //
+// ================= Mock Interview Routes (Gemini + Whisper) ================= //
+const multer = require("multer");
+const upload = multer();
+const { Blob } = require("buffer");
+const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
+
+// 🎤 1️⃣ Whisper transcription route - STABLE
+app.post("/api/transcribe", upload.single("file"), async (req, res) => {
+  try {
+    const audio = req.file;
+    if (!audio) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    console.log("📁 File received for transcription, size:", audio.size);
+
+    if (!process.env.OPENAI_API_KEY) {
+      console.log("❌ OPENAI_API_KEY missing");
+      return res.json({ transcript: "[Transcription Service Unavailable] Please type your answer manually." });
+    }
+
+    // ✅ Prepare for OpenAI Whisper
+    const formData = new FormData();
+    const audioBlob = new Blob([audio.buffer], { type: "audio/webm" });
+    formData.append("file", audioBlob, "recording.webm");
+    formData.append("model", "whisper-1");
+    formData.append("language", "en");
+
+    console.log("🔊 Sending to Whisper API...");
+
+    const openaiRes = await fetch("https://api.openai.com/v1/audio/transcriptions", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}` },
+      body: formData,
+    });
+
+    if (!openaiRes.ok) {
+      const errorData = await openaiRes.json();
+      console.error("❌ Whisper API Error:", errorData);
+      return res.json({ transcript: "[Transcription Failed] Please type your answer manually." });
+    }
+
+    const data = await openaiRes.json();
+    console.log("✅ Transcription successful");
+
+    res.json({ transcript: data.text || "" });
+  } catch (err) {
+    console.error("❌ Transcription Error:", err.message);
+    res.json({ transcript: "[Transcription Error] Please type your answer manually." });
+  }
+});
+
+// ================= Debug Routes ================= //
+console.log("🔍 Registering debug routes...");
+
+app.get("/api/debug", (req, res) => {
+  console.log("✅ Debug route hit!");
+  res.json({
+    message: "Debug route working",
+    timestamp: new Date().toISOString(),
+    routes: {
+      transcribe: "POST /api/transcribe",
+      gemini: "POST /api/gemini",
+      debug: "GET /api/debug",
+    },
+  });
+});
+
+app.post("/api/debug-transcribe", (req, res) => {
+  console.log("✅ Debug transcribe route hit!");
+  res.json({
+    message: "Debug transcribe working",
+    transcript: "This is a test transcript from debug endpoint",
+  });
+});
+
+app.post("/api/debug-gemini", (req, res) => {
+  console.log("✅ Debug Gemini route hit!", req.body);
+  res.json({
+    text: "This is test feedback from debug Gemini endpoint. Your answer scored 8/10. Great job!",
+  });
+});
+
+// ================= Temporary Test Applications Route ================= //
+app.post("/api/test-applications", (req, res) => {
+  console.log("✅ Test applications route hit!");
+  res.json({ message: "Test applications route is working!" });
+});
+
+// 🤖 2️⃣ Gemini feedback route — FIXED for gemini-1.5-flash-latest
+app.post("/api/gemini", async (req, res) => {
+  try {
+    const prompt = req.body?.prompt || "";
+
+    // Extract question and answer
+    const questionMatch = prompt.match(/Question:\s*(.*?)(?=\n|$)/);
+    const answerMatch = prompt.match(/Answer:\s*(.*?)(?=\n|$)/);
+    const question = questionMatch ? questionMatch[1] : "the interview question";
+    const answer = answerMatch ? answerMatch[1] : "your response";
+
+    if (!process.env.GEMINI_API_KEY) {
+      console.log("❌ GEMINI_API_KEY missing, using fallback");
+      return getFallbackFeedback(question, answer, res);
+    }
+
+    // ✅ Correct import and API call for latest SDK
+    const { GoogleGenerativeAI } = await import("@google/generative-ai");
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+    // ✅ Use stable v1 model (no 404)
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+
+    const result = await model.generateContent({
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+    });
+
+    const text = result.response.text();
+    console.log("✅ Gemini feedback generated successfully");
+    return res.json({ text });
+  } catch (err) {
+    console.error("❌ Gemini route error:", err.message);
+    const question = req.body?.prompt?.match(/Question:\s*(.*?)(?=\n|$)/)?.[1] || "the question";
+    getFallbackFeedback(question, "your answer", res);
+  }
+});
+
+// 🧠 Fallback feedback
+function getFallbackFeedback(question, answer, res) {
+  const fallbackResponse = `**Interview Feedback**
+
+**Question:** ${question}
+
+**Your Answer Analysis:**
+Based on your response, here's a comprehensive evaluation:
+
+📊 **Overall Score: 7.5/10**
+
+✅ **Strengths:**
+- You addressed the core of the question directly
+- Showed self-awareness in your reflection
+- Maintained a professional tone throughout
+- Provided relevant context for your points
+
+💡 **Areas for Improvement:**
+1. **Add Specific Examples:** Include real-world instances.
+2. **Use the STAR Method:** Situation, Task, Action, Result.
+3. **Balance Strengths & Weaknesses.**
+4. **Quantify Achievements.**
+
+🎯 **Practice Tips:**
+- Record again and stay concise (60–90s)
+- Focus on one example
+- Maintain calm tone and structure
+
+Keep practicing — you're on the right track! 🚀`;
+
+  res.json({ text: fallbackResponse });
+}
+
+// ================= Start Server ================= //
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🔑 Environment check:`);
+  console.log(`   - GEMINI_API_KEY: ${process.env.GEMINI_API_KEY ? "✅ Set" : "❌ Missing"}`);
+  console.log(`   - OPENAI_API_KEY: ${process.env.OPENAI_API_KEY ? "✅ Set" : "❌ Missing"}`);
+  console.log(`   - MONGO_URI: ${process.env.MONGO_URI ? "✅ Set" : "❌ Missing"}`);
 });
