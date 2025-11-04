@@ -3,6 +3,7 @@ const router = express.Router();
 const Application = require('../models/Application');
 const User = require('../models/user.js');
 const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 // Apply for job
 router.post('/', async (req, res) => {
@@ -107,6 +108,11 @@ router.post('/job/:jobId/send-to-company', async (req, res) => {
 
     console.log("📧 Sending applications to company:", { jobId, companyEmail });
 
+    // Validate environment variables
+    if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+      return res.status(500).json({ error: 'Email configuration missing. Please contact administrator.' });
+    }
+
     // Get applications with student and job details
     const applications = await Application.find({ job: jobId })
       .populate('student', 'name email usn branch cgpa phone')
@@ -168,18 +174,18 @@ router.post('/job/:jobId/send-to-company', async (req, res) => {
 </html>
     `;
 
-    // Create transporter (using Gmail - you need to configure this)
+    // Create transporter using environment variables
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'sshreepadmavathi@gmail.com', // Change this to your college email
-        pass: 'doff brjg auyz ecep' // Use App Password, not regular password
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD
       }
     });
 
     // Email options
     const mailOptions = {
-      from: '"College Placement Cell" <sshreepadmavathi@gmail.com>',
+      from: `"College Placement Cell" <${process.env.GMAIL_USER}>`,
       to: companyEmail,
       subject: `Applications for ${job.title} - ${applications.length} Candidates`,
       html: emailHTML
