@@ -29,7 +29,7 @@ function JobsPage() {
 
   return (
     <div className="jobs-page-container">
-      <h1 className="job-heading">Available Job Opportunities</h1>
+      <h1 className="job-heading">Availabl</h1>
 
       {loading ? (
         <p>Loading...</p>
@@ -50,7 +50,7 @@ function JobsPage() {
                   className="apply-button"
                   onClick={handlePlaceholderClick}
                 >
-                  Apply Now
+                  Apply 
                 </button>
               </li>
             ))}

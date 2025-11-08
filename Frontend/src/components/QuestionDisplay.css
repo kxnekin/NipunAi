@@ -1,0 +1,329 @@
+.question-display {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin: 20px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.progress-info {
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+}
+
+.timer {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: #f8f9fa;
+  border: 2px solid currentColor;
+}
+
+.timer.green {
+  color: #28a745;
+  border-color: #28a745;
+}
+
+.timer.orange {
+  color: #fd7e14;
+  border-color: #fd7e14;
+}
+
+.timer.red {
+  color: #dc3545;
+  border-color: #dc3545;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.question-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin: 20px 0;
+  text-align: center;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.question-text {
+  font-size: 20px;
+  line-height: 1.6;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.audio-controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.audio-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.audio-btn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+}
+
+.audio-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.audio-btn.play {
+  background: rgba(255,255,255,0.9);
+  color: #667eea;
+}
+
+.audio-btn.stop {
+  background: #ff6b6b;
+  color: white;
+}
+
+.navigation-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px solid #f0f0f0;
+}
+
+.nav-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #6c757d;
+  color: white;
+}
+
+.nav-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.prev-btn {
+  background: #17a2b8;
+}
+
+.next-btn {
+  background: #28a745;
+}
+
+.question-counter {
+  font-size: 16px;
+  font-weight: 600;
+  color: #495057;
+  background: #e9ecef;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.time-warning {
+  background: #fff3cd;
+  color: #856404;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 15px;
+  border: 1px solid #ffeaa7;
+  font-weight: 600;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .question-display {
+    padding: 15px;
+    margin: 10px;
+  }
+  
+  .progress-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .question-text {
+    font-size: 18px;
+  }
+  
+  .audio-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .navigation-controls {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+/* Fix translucent text overlapping issue */
+.feedback-state,
+.analysis-popup-overlay,
+.luxury-card,
+.question-card {
+  isolation: isolate; /* ensures blending doesn't affect nested layers */
+}
+
+.analysis-popup-overlay .popup-content-wrapper,
+.feedback-state,
+.question-card .overall-summary,
+.question-card p,
+.question-card .list-item,
+.right-column .luxury-card {
+  background: rgba(20, 20, 30, 0.85); /* gives text a solid backdrop */
+  color: #f1f1f1;
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  z-index: 3;
+  position: relative;
+}
+
+/* Ensure text is crisp and readable */
+.overall-summary,
+.feedback-state p,
+.analysis-popup-overlay p {
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+}
+/* Add these styles to your QuestionDisplay.css */
+
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.timer.green {
+  color: #22c55e;
+  border: 1px solid #22c55e;
+}
+
+.timer.orange {
+  color: #f59e0b;
+  border: 1px solid #f59e0b;
+  animation: pulse 1s infinite;
+}
+
+.timer.red {
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  animation: pulse 0.5s infinite;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.timer-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.timer-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.time-up-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ef4444;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  font-weight: bold;
+  z-index: 1000;
+  animation: bounceIn 0.5s;
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
+}
+
+@keyframes bounceIn {
+  0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
+  70% { transform: translate(-50%, -50%) scale(0.9); }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .timer {
+    font-size: 14px;
+    padding: 3px 8px;
+  }
+  
+  .timer-controls {
+    gap: 2px;
+  }
+  
+  .timer-btn {
+    padding: 1px 4px;
+    font-size: 10px;
+  }
+}

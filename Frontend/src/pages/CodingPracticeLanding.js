@@ -20,7 +20,7 @@ function CodingPracticeLanding() {
           className="option-card"
           onClick={() => handleNavigation("/coding/fundamentals")}
         >
-          📚
+          <span>📚</span>
           <h2>Fundamental Questions</h2>
           <p>
             Practice from curated coding questions (Top 50 LeetCode + Admin
@@ -28,22 +28,13 @@ function CodingPracticeLanding() {
           </p>
         </div>
 
-        {/* Coding Playground */}
-       <div
-        className="option-card"
-        onClick={() => handleNavigation("/coding/leetcode")}
-      >
-        💻
-      <h2>Coding Playground</h2>
-      <p>Pick a problem and solve it with a live coding editor</p>
-      </div>
-
         {/* Admin Roadmaps */}
         <div
           className="option-card"
-          onClick={() => handleNavigation("/coding/admin-roadmaps")}
+          // **This path must match your <Route> in your main router file!**
+          onClick={() => handleNavigation("/coding/admin-roadmaps")} 
         >
-          🗺️
+          <span>🗺️</span>
           <h2>Admin Roadmaps</h2>
           <p>Follow structured learning paths created by your admin</p>
         </div>
@@ -53,7 +44,7 @@ function CodingPracticeLanding() {
           className="option-card"
           onClick={() => handleNavigation("/coding/core-subjects")}
         >
-          📖
+          <span>📖</span>
           <h2>Core Subjects</h2>
           <p>
             Learn CN, DBMS, OS, and other non-coding subjects with admin
@@ -66,7 +57,7 @@ function CodingPracticeLanding() {
           className="option-card"
           onClick={() => handleNavigation("/coding/company-resources")}
         >
-          🏢
+          <span>🏢</span>
           <h2>Company-wise Resources</h2>
           <p>
             Interview resources & questions sorted by company (added by Admin)

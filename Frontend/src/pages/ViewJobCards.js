@@ -41,9 +41,7 @@ const ViewJobCards = () => {
 
     setApplicantsLoading(true);
     try {
-      const res = await axios.get(
-        `http://localhost:5000/api/jobs/${jobId}/applicants`
-      );
+      const res = await axios.get(`http://localhost:5000/api/applications/job/${jobId}`);
       setSelectedApplicants({ jobId, applicants: res.data });
     } catch (err) {
       console.error("Error fetching applicants:", err);
@@ -53,9 +51,32 @@ const ViewJobCards = () => {
     }
   };
 
+  const handleSendToCompany = async (jobId, jobTitle) => {
+    const companyEmail = prompt(`Enter company email address for "${jobTitle}":`);
+    if (!companyEmail) return;
+
+    const customMessage = prompt('Optional: Add a custom message for the company:') || '';
+
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/api/applications/job/${jobId}/send-to-company`,
+        { companyEmail, customMessage }
+      );
+
+      if (response.data.success) {
+        alert(`✅ Applications sent successfully to ${companyEmail}\n\nApplicants: ${response.data.applicantsCount}`);
+        
+        // Optional: Show email content for testing
+        console.log("Email Content:", response.data.emailContent);
+      }
+    } catch (err) {
+      console.error('Send to company error:', err);
+      alert('❌ Failed to send applications: ' + (err.response?.data?.error || 'Please try again'));
+    }
+  };
+
   return (
     <div style={styles.container}>
-      {/* ADDED: New panel wrapper for the main content */}
       <div style={styles.panel}>
         <h2 style={styles.heading}>📋 All Job Cards</h2>
 
@@ -104,6 +125,13 @@ const ViewJobCards = () => {
                   >
                     👀 View Applicants
                   </button>
+
+                  <button
+                    style={styles.emailButton}
+                    onClick={() => handleSendToCompany(job._id, job.title)}
+                  >
+                    📧 Send to Company
+                  </button>
                 </div>
 
                 {selectedApplicants?.jobId === job._id && (
@@ -115,9 +143,24 @@ const ViewJobCards = () => {
                       <p>No applicants yet.</p>
                     ) : (
                       <ul>
-                        {selectedApplicants.applicants.map((applicant) => (
-                          <li key={applicant._id}>
-                            {applicant.name} - {applicant.email}
+                        {selectedApplicants.applicants.map((application) => (
+                          <li key={application._id} style={styles.applicantItem}>
+                            <strong>{application.student.name}</strong> 
+                            <br />Email: {application.student.email}
+                            <br />USN: {application.student.usn || 'N/A'}
+                            <br />Branch: {application.student.branch || 'N/A'}
+                            <br />CGPA: {application.student.cgpa || 'N/A'}
+                            <br />Phone: {application.student.phone || 'N/A'}
+                            <br />Applied: {new Date(application.appliedAt).toLocaleDateString()}
+                            <br />
+                            <a 
+                              href={`http://localhost:5000/api/resume/download/${application.student.email}`} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              style={styles.resumeLink}
+                            >
+                              📄 View Resume
+                            </a>
                           </li>
                         ))}
                       </ul>
@@ -134,7 +177,6 @@ const ViewJobCards = () => {
 };
 
 const styles = {
-  // MODIFIED: This is now a flex container to center the panel
   container: {
     minHeight: "100vh",
     padding: "20px",
@@ -145,34 +187,32 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
-  // ADDED: Style for the new fullscreen panel
   panel: {
     width: "95%",
     height: "90vh",
-    background: "#27293d", // A slightly different background for the panel
+    background: "#27293d",
     borderRadius: "15px",
     boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
     padding: "20px",
     boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
-    overflow: "hidden", // Important to contain the scrolling list
+    overflow: "hidden",
   },
   heading: {
     textAlign: "center",
     marginBottom: "20px",
     fontSize: "28px",
     color: "#fff",
-    flexShrink: 0, // Prevents the heading from shrinking
+    flexShrink: 0,
   },
-  // MODIFIED: This list now scrolls inside the panel
   jobListScroll: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
     gap: "20px",
     padding: "10px",
-    flex: 1, // This makes the list grow to fill the available space in the panel
-    overflowY: "auto", // This adds the scrollbar when needed
+    flex: 1,
+    overflowY: "auto",
   },
   card: {
     background: "#2b2b3c",
@@ -213,11 +253,35 @@ const styles = {
     cursor: "pointer",
     flex: 1,
   },
+  emailButton: {
+    padding: "10px",
+    borderRadius: "8px",
+    backgroundColor: "#27ae60",
+    border: "none",
+    color: "white",
+    fontWeight: "bold",
+    cursor: "pointer",
+    flex: 1,
+  },
   applicantsContainer: {
     marginTop: "15px",
     padding: "12px",
     backgroundColor: "#3b3b50",
     borderRadius: "8px",
+  },
+  applicantItem: {
+    marginBottom: '15px',
+    padding: '10px',
+    background: '#4a4a5f',
+    borderRadius: '5px',
+    fontSize: '14px',
+  },
+  resumeLink: {
+    color: '#4cafef',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    marginTop: '5px',
+    display: 'inline-block',
   },
 };
 

@@ -1,26 +1,72 @@
 // ================== IMPORTS ================== //
 
-// ✅ THIS IS THE FIX: Load .env variables BEFORE anything else.
-require("dotenv").config();
+// ✅ Load environment variables before anything else
+import "dotenv/config"; // Use this simple import to load .env
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url"; // Needed for __dirname in ESM
 
-// Now, all other files can safely use process.env
-const express = require("express");
-const cors = require("cors"); // ✅ REMOVED the extra quotes
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const path = require("path");
-const User = require("./models/user"); // ✅ User model
+// ✅ Import routes (assuming they use `export default`)
+// NOTE: In ESM, you must include the .js extension for local files
+import User from "./models/user.js";
+import authRoutes from "./routes/auth.js";
+import jobRoutes from "./routes/jobs.js";
+import resumeRoutes from "./routes/resume.js";
+import runRoutes from "./routes/run.js";
+import roadmapRoutes from "./routes/roadmaps.js";
+import subjectRoutes from "./routes/subjects.js";
+import profileRoutes from "./routes/profile.js";
+import adminRoutes from "./routes/admin.js";
+import resumeOptimizerRoutes from "./routes/resumeOptimizerRoutes.js";
+import workExpRoutes from "./routes/workExpRoutes.js";
+//
+// 1. 👈 --- IMPORTED NEW COMPANY RESOURCE ROUTE ---
+import companyResourceRoutes from "./routes/companyResources.js"; 
+//
+// ✅ Import JSON (using the modern 'with' syntax)
+import leetcodeQuestions from "./leetcode-questions.json" with { type: "json" };
 
+// ================== Path Setup ================== //
+// Standard workaround for __dirname in ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ================== Server & Port Setup ================== //
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ================== Middleware ================== //
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json()); // ✅ Replaces deprecated bodyParser.json()
+
+// ================== Ensure Upload Folders Exist ================== //
+const uploadDirs = [
+  path.join(__dirname, "uploads"),
+  path.join(__dirname, "uploads/roadmaps"),
+  path.join(__dirname, "uploads/subjects"), 
+  //
+  // 2. 👈 --- ADDED NEW COMPANY RESOURCE FOLDER ---
+  path.join(__dirname, "uploads/company_resources"), 
+  //
+  path.join(__dirname, "resume_optimizer_uploads"),
+];
+uploadDirs.forEach((dir) => {
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+});
 
 // ================== MongoDB Connection ================== //
+const MONGO_URI = process.env.MONGO_URI;
+
+if (!MONGO_URI) {
+  console.error("❌ FATAL ERROR: MONGO_URI is not defined in .env file.");
+  process.exit(1); // Exit the application if the DB connection string is missing
+}
+
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/nipun-ai-db") // This will now work
+  .connect(MONGO_URI) // Deprecated options removed
   .then(async () => {
     console.log("✅ MongoDB connected");
     await createDefaultAdmin();
@@ -39,7 +85,7 @@ async function createDefaultAdmin() {
     const adminUser = new User({
       name: "Admin User",
       email: "admin@nipunai.com",
-      password: "Admin@123", // pre-save hook will hash this automatically
+      password: "Admin@123", // pre-save hook will hash this
       role: "admin",
     });
 
@@ -51,41 +97,21 @@ async function createDefaultAdmin() {
 }
 
 // ================== Routes ================== //
-// All these routes will now have access to process.env
-const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
-
-const jobRoutes = require("./routes/jobs");
 app.use("/api/jobs", jobRoutes);
-
-const resumeRoutes = require("./routes/resume");
 app.use("/api/resume", resumeRoutes);
-
-const runRoutes = require("./routes/run");
 app.use("/api/run", runRoutes);
-
-const roadmapRoutes = require("./routes/roadmaps");
 app.use("/api/roadmaps", roadmapRoutes);
-
-const profileRoutes = require("./routes/profile");
+app.use("/api/subjects", subjectRoutes); 
 app.use("/api/profile", profileRoutes);
-
-const adminRoutes = require("./routes/admin");
 app.use("/api/admin", adminRoutes);
-
-const jobRoutes = require("./routes/jobs");
-app.use("/api/jobs", jobRoutes);
-
-
-const resumeOptimizerRoutes = require("./routes/resumeOptimizerRoutes");
-app.use("/api/resume-optimizer", resumeOptimizerRoutes); // fixed path consistency
-
-// 🆕 Add your new Work Experience Routes
-const workExpRoutes = require("./routes/workExpRoutes"); // ✅ fixed filename
+app.use("/api/resume-optimizer", resumeOptimizerRoutes);
 app.use("/api/workexp", workExpRoutes);
-
+//
+// 3. 👈 --- USING NEW COMPANY RESOURCE ROUTE ---
+app.use("/api/company-resources", companyResourceRoutes); 
+//
 // ================== LeetCode Questions ================== //
-const leetcodeQuestions = require("./leetcode-questions.json");
 
 // Get all questions
 app.get("/api/leetcode-questions", (req, res) => {
@@ -105,9 +131,8 @@ app.get("/api/leetcode-questions/:titleSlug", (req, res) => {
 });
 
 // ================== Static File Serving ================== //
+// Note: /uploads also serves /uploads/roadmaps, /uploads/subjects, etc.
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-// 🆕 Serve resume optimizer uploads folder
 app.use(
   "/resume_optimizer_uploads",
   express.static(path.join(__dirname, "resume_optimizer_uploads"))
@@ -118,7 +143,7 @@ app.get("/", (req, res) => {
   res.send("🚀 Nipun AI Backend is running!");
 });
 
-// ================== Start Server ================== //
+// =F ================= Start Server ================== //
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
