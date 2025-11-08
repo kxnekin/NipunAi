@@ -1,0 +1,1788 @@
+/* MockInterview.css - Professional Three-Column Layout */
+
+.mock-interview-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  color: #ffffff;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Luxury Card Design - Enhanced for Grid Layout */
+.luxury-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  min-height: 300px; /* Consistent min-height for alignment */
+}
+
+.luxury-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.luxury-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-content {
+  padding: 24px;
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Header */
+.interview-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: rgba(15, 15, 25, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header-main h1 {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 4px 0;
+}
+
+.session-info {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Three Column Layout - Professional Grid System */
+.interview-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* Center panel 2x width of side panels */
+  gap: 24px;
+  padding: 94px 24px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: calc(100vh - 118px);
+  align-items: start;
+  align-content: start;
+}
+
+/* Left Column - Evaluation Metrics */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+}
+
+.interviewer-panel {
+  min-height: 400px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.ai-avatar {
+  position: relative;
+}
+
+.avatar-orb {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid rgba(23, 23, 23, 0.9);
+}
+
+.panel-info h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: #ffffff;
+}
+
+.panel-info p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* Center Column - Hero Element */
+.center-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+}
+
+.camera-section {
+  background: rgba(255, 255, 255, 0.08); /* Enhanced background for hero element */
+  border: 2px solid rgba(102, 126, 234, 0.3); /* Primary color border */
+  box-shadow: 0 25px 50px rgba(37, 99, 235, 0.2), 0 0 0 1px rgba(102, 126, 234, 0.1); /* Deeper shadow */
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.camera-section .card-content {
+  padding: 32px; /* More padding for hero element */
+}
+
+.camera-frame {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  flex: 1;
+}
+
+.camera-frame::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, 
+    rgba(102, 126, 234, 0.4) 0%, 
+    rgba(102, 126, 234, 0.1) 25%, 
+    rgba(102, 126, 234, 0.05) 50%, 
+    rgba(102, 126, 234, 0.1) 75%, 
+    rgba(102, 126, 234, 0.4) 100%);
+  border-radius: 18px;
+  z-index: -1;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.camera-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 110%;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.2) 50%, transparent 70%);
+  filter: blur(25px);
+  z-index: -1;
+}
+
+.live-transcript-bar {
+  width: 100%;
+  background: rgba(15, 15, 25, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.4;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.transcript-scroll {
+  max-height: 60px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.transcript-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.transcript-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+/* Right Column - AI Evaluation */
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+}
+
+.evaluation-panel {
+  min-height: 400px;
+  background: rgba(248, 250, 252, 0.02); /* Lighter treatment for side panels */
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.panel-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.evaluation-status {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Score Meters */
+.score-meters {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.score-meter {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.meter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.meter-label {
+  font-size: 14px;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.meter-value {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.meter-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 4px;
+  transition: width 0.8s ease;
+}
+
+/* Progress Display */
+.progress-display {
+  margin-bottom: 24px;
+}
+
+.progress-display h4 {
+  margin: 0 0 16px 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  text-align: center;
+  color: #b0b0b0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.luxury-btn {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.luxury-btn.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.luxury-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.luxury-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.luxury-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.luxury-btn.danger {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  color: white;
+}
+
+.luxury-btn.danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+/* Transcript Section */
+.transcript-section {
+  min-height: 300px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.recording-status, .camera-status {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.transcript-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 150px;
+  max-height: 200px;
+  overflow-y: auto;
+  line-height: 1.5;
+  font-size: 14px;
+  color: #e0e0e0;
+}
+
+.transcript-stats {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+  font-size: 12px;
+  color: #b0b0b0;
+}
+
+/* Loading Overlay */
+.loading-overlay.luxury-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(12, 12, 12, 0.95);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: #ffffff;
+}
+
+.luxury-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Evaluation Loading */
+.evaluation-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: white;
+  text-align: center;
+}
+
+.evaluation-progress {
+  width: 300px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.evaluation-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
+.loading-steps {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.loading-step {
+  margin: 10px 0;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  font-size: 14px;
+}
+
+.loading-step.active {
+  opacity: 1;
+  color: #667eea;
+  font-weight: bold;
+}
+
+/* AI Feedback Overlay */
+.ai-feedback-overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+}
+
+.feedback-chip {
+  background: rgba(239, 68, 68, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideInDown 0.3s ease;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Analysis Popup - Keep existing styles but ensure proper z-index */
+.analysis-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Selection Screen */
+.interview-selection {
+  padding: 24px;
+}
+
+.header-section {
+  text-align: center;
+  padding: 60px 24px;
+}
+
+.luxury-title {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 16px;
+}
+
+.luxury-subtitle {
+  font-size: 1.1rem;
+  color: #b0b0b0;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.interview-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.category-card {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.category-card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.category-card p {
+  color: #b0b0b0;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.domain-options {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.domain-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: #e0e0e0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.domain-btn:hover {
+  background: rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.5);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .interview-content {
+    grid-template-columns: 300px 1fr 300px;
+    gap: 20px;
+    padding: 94px 20px 20px;
+  }
+}
+
+@media (max-width: 968px) {
+  .interview-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 20px;
+  }
+  
+  .center-column {
+    order: 1;
+  }
+  
+  .left-column {
+    order: 2;
+  }
+  
+  .right-column {
+    order: 3;
+  }
+  
+  .camera-section {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .interview-content {
+    padding: 94px 16px 16px;
+  }
+  
+  .header-content {
+    padding: 0 16px;
+  }
+  
+  .luxury-title {
+    font-size: 2rem;
+  }
+  
+  .interview-categories {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+}
+
+/* Ensure everything fits at 100% zoom */
+html {
+  zoom: 1;
+  -moz-transform: scale(1);
+  -moz-transform-origin: 0 0;
+}
+
+body {
+  transform-origin: 0 0;
+  overflow-x: hidden;
+}
+/* --------------------------------------------------------------- */
+/* ✅ OVERRIDE: 3-Column Professional Grid Alignment (Desktop View) */
+/* --------------------------------------------------------------- */
+.interview-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* Center twice as wide */
+  gap: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 100px 32px 40px;
+  align-items: start;
+  min-height: calc(100vh - 120px);
+}
+
+/* Columns aligned with equal height and visual balance */
+.left-column,
+.center-column,
+.right-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  min-height: 100%;
+}
+
+/* Side panels - cleaner, lighter background */
+.left-column .luxury-card,
+.right-column .luxury-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Center panel - hero focus with subtle 3D elevation */
+.center-column .luxury-card {
+  background: rgba(15, 15, 25, 0.9);
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.35),
+              0 0 40px rgba(102, 126, 234, 0.15);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  transform: translateY(-2px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.center-column .luxury-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(37, 99, 235, 0.45),
+              0 0 60px rgba(118, 75, 162, 0.25);
+}
+
+/* Remove nested scrollbars, make height flexible */
+.camera-wrapper,
+.camera-side-panel,
+.evaluation-result {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Make performance trends & metrics expand naturally */
+.performance-trend,
+.warnings-section,
+.metrics-grid {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Improve alignment of panels */
+.luxury-card,
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+/* Header alignment fix */
+.interview-header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 20, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+/* Consistent spacing (8px base system) */
+:root {
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+}
+.luxury-card,
+.card-content,
+.panel-section,
+.score-meters,
+.action-buttons {
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+
+/* Unified text rhythm */
+h1, h2, h3, h4, h5, h6, p, span {
+  line-height: 1.4;
+  letter-spacing: 0.2px;
+}
+
+/* Performance & transcript alignment */
+.performance-trend,
+.confidence-meter {
+  margin-top: 12px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure camera and question card align horizontally */
+.center-column {
+  align-items: center;
+}
+.camera-wrapper {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Right column alignment */
+.right-column {
+  align-items: stretch;
+}
+.right-column .luxury-card {
+  height: 100%;
+}
+
+/* Subtle responsive fix */
+@media (max-width: 1200px) {
+  .interview-content {
+    grid-template-columns: 1fr 1.6fr 1fr;
+    gap: 20px;
+  }
+}
+@media (max-width: 992px) {
+  .interview-content {
+    grid-template-columns: 1fr;
+  }
+}
+/* --------------------------------------------------------------- */
+/* ✅ FINAL DESKTOP / LAPTOP GRID FIXES */
+/* --------------------------------------------------------------- */
+
+/* Force desktop 3-column layout */
+@media (min-width: 1024px) {
+  .interview-content {
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 32px;
+    padding: 100px 40px 60px;
+    max-width: 1800px;
+  }
+
+  .left-column,
+  .center-column,
+  .right-column {
+    align-self: stretch;
+    height: auto;
+  }
+
+  /* Center panel fills vertical space neatly */
+  .center-column {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  /* Make the camera wrapper and its content take full height */
+  .camera-wrapper {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    background: rgba(15, 15, 25, 0.8);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .camera-video-container {
+    height: 520px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  /* Remove overflow so nothing cuts off */
+  .camera-side-panel {
+    height: auto !important;
+    overflow: visible !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(20, 20, 30, 0.9);
+    border-radius: 0 0 20px 20px;
+    padding-bottom: 16px;
+  }
+
+  /* Performance trend and AI feedback sections expand naturally */
+  .performance-trend,
+  .confidence-meter,
+  .warnings-section {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Center hero elevation */
+  .center-column .luxury-card {
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.45),
+                0 0 60px rgba(118, 75, 162, 0.25);
+    border: 1px solid rgba(102, 126, 234, 0.35);
+  }
+
+  /* Right column balance */
+  .right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .right-column .luxury-card {
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* Adjust question card alignment in left column */
+  .left-column .luxury-card {
+    height: fit-content;
+  }
+
+  /* Smooth top alignment */
+  .left-column,
+  .right-column {
+    margin-top: 0;
+  }
+}
+
+/* Force back to 3-column until <900px width */
+@media (max-width: 1023px) {
+  .interview-content {
+    grid-template-columns: 1fr;
+  }
+}
+/* --------------------------------------------------------------- */
+/* ✅ LAPTOP & DESKTOP OPTIMIZATION PATCH (No Zoom Needed) */
+/* --------------------------------------------------------------- */
+@media (min-width: 1280px) {
+  .interview-content {
+    grid-template-columns: 1fr 2fr 1fr;
+    max-width: 1900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 100px 60px 60px;
+    gap: 36px;
+  }
+
+  /* Expand center camera card fully within 2fr space */
+  .center-column {
+    align-items: stretch;
+  }
+
+  .camera-wrapper {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    background: rgba(15, 15, 25, 0.85);
+    box-shadow: 0 10px 40px rgba(37, 99, 235, 0.4);
+  }
+
+  .camera-video-container {
+    height: 560px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .camera-side-panel {
+    flex: 1;
+    height: auto;
+    overflow: visible;
+    border-radius: 0 0 20px 20px;
+    background: rgba(25, 25, 35, 0.95);
+    padding: 20px 28px 24px;
+  }
+
+  /* Scale down fonts and bars slightly for better fit */
+  .metric-label,
+  .metric-value,
+  .trend-indicator,
+  .confidence-value {
+    font-size: 0.85rem !important;
+  }
+
+  .trend-bar {
+    min-height: 3px;
+  }
+
+  /* Allow performance bars and confidence levels to fit */
+  .metric-row,
+  .performance-trend,
+  .confidence-meter {
+    transform: scale(0.95);
+    transform-origin: left center;
+  }
+
+  /* Side panels spacing fix */
+  .left-column .luxury-card,
+  .right-column .luxury-card {
+    padding: 24px 28px;
+  }
+
+  /* Slightly tighter header for more space */
+  .interview-header {
+    height: 64px;
+    padding: 0 48px;
+  }
+
+  /* Prevent overall zoom need */
+  html {
+    zoom: 1 !important;
+    transform: none !important;
+  }
+}
+/* --------------------------------------------------------------- */
+/* ✅ FULL HD / 1920×1080 OPTIMIZATION — WIDER CENTER PANEL */
+/* --------------------------------------------------------------- */
+@media (min-width: 1600px) {
+  .interview-content {
+    grid-template-columns: 1fr 2.5fr 1fr;   /* wider center */
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 40px;
+    padding: 100px 60px 60px;
+    align-items: start;
+  }
+
+  /* Center column occupies more width */
+  .center-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  /* Camera card uses full available width, shorter height */
+  .camera-wrapper {
+    width: 100%;
+    max-width: 100%;
+    background: rgba(15, 15, 25, 0.9);
+    border-radius: 24px;
+    box-shadow: 0 12px 48px rgba(37, 99, 235, 0.45),
+                0 0 60px rgba(118, 75, 162, 0.25);
+    overflow: hidden;
+  }
+
+  /* Camera feed becomes wider & less tall for cinematic balance */
+  .camera-video-container {
+    width: 100%;
+    height: 420px;
+    border-radius: 24px 24px 0 0;
+    object-fit: cover;
+  }
+
+  /* Side metrics arranged horizontally within the card */
+  .camera-side-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 24px;
+    row-gap: 16px;
+    padding: 24px 32px 32px;
+    background: rgba(22, 22, 35, 0.9);
+    border-radius: 0 0 24px 24px;
+  }
+
+  /* Each metric section adapts cleanly to wider layout */
+  .metric-row,
+  .performance-trend,
+  .confidence-meter,
+  .warnings-section {
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  /* Prevent squeezed text */
+  .metric-label,
+  .metric-value {
+    font-size: 0.9rem;
+  }
+
+  /* Slight typography scaling for desktop clarity */
+  h1, h2, h3, h4, h5, h6, p, span {
+    font-size: clamp(0.95rem, 1vw, 1.1rem);
+  }
+
+  /* Adjust side columns to align perfectly with new proportions */
+  .left-column,
+  .right-column {
+    margin-top: 0;
+  }
+  .left-column .luxury-card,
+  .right-column .luxury-card {
+    min-height: 92%;
+  }
+
+  /* Subtle hover depth for hero center card */
+  .center-column .luxury-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 60px rgba(37, 99, 235, 0.55),
+                0 0 80px rgba(118, 75, 162, 0.35);
+  }
+}
+/* --------------------------------------------------------------- */
+/* ✅ LEFT COLUMN REFINEMENT — Align Transcript under Question Card */
+/* --------------------------------------------------------------- */
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* consistent vertical rhythm */
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+/* Ensure both cards use same width & spacing */
+.left-column .luxury-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+/* Live transcript aligns visually right below question */
+.left-column .live-transcript-card {
+  margin-top: 0; /* remove extra spacing */
+  align-self: stretch;
+}
+
+/* For perfect alignment with question card top edge */
+.left-column .luxury-card:first-child {
+  margin-top: 0;
+}
+/* --------------------------------------------------------------- */
+/* ✅ LEFT COLUMN REFINEMENT — Align Transcript under Question Card */
+/* --------------------------------------------------------------- */
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* consistent vertical rhythm */
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+/* Ensure both cards use same width & spacing */
+.left-column .luxury-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+/* Live transcript aligns visually right below question */
+.left-column .live-transcript-card {
+  margin-top: 0; /* remove extra spacing */
+  align-self: stretch;
+}
+
+/* For perfect alignment with question card top edge */
+.left-column .luxury-card:first-child {
+  margin-top: 0;
+}
+/* --------------------------------------------------------------- */
+/* ✅ EMBED TRANSCRIPT INSIDE QUESTION CARD (LEFT COLUMN REFINEMENT) */
+/* --------------------------------------------------------------- */
+
+/* Make the question card a unified container */
+.left-column .luxury-card.question-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 24px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Ensure the question text and buttons stay on top */
+.question-card .question-section {
+  flex: 0 0 auto;
+}
+
+/* Embed transcript naturally below the question content */
+.question-card .live-transcript-card {
+  flex: 1;
+  margin: 0;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: rgba(30, 30, 40, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+/* Adjust transcript header and text alignment */
+.live-transcript-card h4,
+.live-transcript-card .transcript-header {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #d1d5db;
+}
+
+.live-transcript-card p,
+.live-transcript-card span {
+  font-size: 0.85rem;
+  color: #e5e7eb;
+  line-height: 1.5;
+}
+
+/* Maintain proportional layout for entire left column */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 32px;
+}
+/* Fix translucent text overlapping issue */
+.feedback-state,
+.analysis-popup-overlay,
+.luxury-card,
+.question-card {
+  isolation: isolate; /* ensures blending doesn't affect nested layers */
+}
+
+.analysis-popup-overlay .popup-content-wrapper,
+.feedback-state,
+.question-card .overall-summary,
+.question-card p,
+.question-card .list-item,
+.right-column .luxury-card {
+  background: rgba(20, 20, 30, 0.85); /* gives text a solid backdrop */
+  color: #f1f1f1;
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  z-index: 3;
+  position: relative;
+}
+
+/* Ensure text is crisp and readable */
+.overall-summary,
+.feedback-state p,
+.analysis-popup-overlay p {
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+}
+/* ----------- FIX: AI Analysis Popup Layout ----------- */
+
+.luxury-popup-card {
+  position: relative;
+  background: rgba(20, 20, 30, 0.92);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 25px 35px;
+  max-width: 900px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto; /* ✅ scroll if content grows */
+  margin: 60px auto;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  color: #f1f1f1;
+  animation: fadeInPopup 0.4s ease-out;
+}
+
+@keyframes fadeInPopup {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure text wraps neatly */
+.overall-summary,
+.strengths-list li,
+.improvements-list li {
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* Strengths & Improvement cards */
+.section-card {
+  background: rgba(30, 30, 40, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.list-title {
+  font-weight: 600;
+  color: #00e676;
+  margin-bottom: 8px;
+}
+
+.improvements-section .list-title {
+  color: #ff5252;
+}
+
+.list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: #e0e0e0;
+  margin-bottom: 6px;
+}
+
+/* Buttons */
+.action-button {
+  background: linear-gradient(135deg, #6a5acd, #7b68ee);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(106, 90, 205, 0.4);
+}
+
+/* Tab section cleanup */
+.popup-tabs {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 10px 0 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tab-button {
+  background: transparent;
+  color: #ccc;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 10px 10px 0 0;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tab-active {
+  color: #fff;
+  background: rgba(100, 100, 255, 0.2);
+  border-bottom: 3px solid #7b68ee;
+}
+/* ---------- FIX: Delivery Analysis Clipping ---------- */
+
+.evaluation-panel,
+.luxury-card.evaluation-panel,
+.right-column .luxury-card {
+  max-height: 90vh;               /* allow full display on 1080p */
+  overflow-y: auto;               /* ✅ adds scroll if needed */
+  padding-bottom: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #7b68ee rgba(255,255,255,0.1);
+}
+
+/* Make inner content scrollable safely */
+.evaluation-panel .card-content {
+  overflow-y: visible; /* allow Delivery Analysis to expand naturally */
+}
+
+/* Keep text and bars visible */
+.delivery-analysis,
+.score-meters,
+.delivery-suggestions,
+.performance-analytics {
+  overflow: visible;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* Optional: improve visual flow */
+.right-column .luxury-card {
+  background: rgba(20, 20, 30, 0.92);
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Scrollbar aesthetic (for dark theme) */
+.evaluation-panel::-webkit-scrollbar {
+  width: 6px;
+}
+.evaluation-panel::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+}
+.evaluation-panel::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7b68ee, #6a5acd);
+  border-radius: 4px;
+}
+/* ---------- FIX: Strengths & Improvement Alignment ---------- */
+
+.evaluation-panel .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 14px;
+  overflow: visible;
+  padding-bottom: 25px;
+}
+
+/* Strengths & Areas sections layout */
+.your-strengths,
+.areas-to-improve {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* Section cards */
+.your-strengths .section-card,
+.areas-to-improve .section-card {
+  background: rgba(35, 35, 45, 0.95);
+  border-radius: 10px;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  color: #f5f5f5;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Fix inner scroll clipping */
+.right-column .luxury-card,
+.evaluation-panel {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 88vh;
+  scrollbar-width: thin;
+  scrollbar-color: #6a5acd rgba(255,255,255,0.1);
+}
+
+.right-column .luxury-card::-webkit-scrollbar {
+  width: 6px;
+}
+.right-column .luxury-card::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6a5acd, #7b68ee);
+  border-radius: 4px;
+}
+
+/* Button stays fixed below */
+.action-buttons,
+.next-question-btn {
+  margin-top: auto;
+  text-align: center;
+}
+
+.next-question-btn button,
+.luxury-btn.primary {
+  background: linear-gradient(135deg, #6a5acd, #7b68ee);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+}
+
+.next-question-btn button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(123, 104, 238, 0.4);
+}
+/* ---------- FIX 1: Analysis Popup Layout + No Horizontal Scroll ---------- */
+.luxury-popup-card {
+  position: relative;
+  background: rgba(15, 15, 25, 0.92);
+  backdrop-filter: blur(24px);
+  border-radius: 16px;
+  padding: 32px 40px;
+  max-width: 960px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;   /* ✅ only vertical scroll */
+  overflow-x: hidden; /* ❌ removes horizontal bar */
+  margin: 50px auto;
+  color: #f1f1f1;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7),
+              0 0 15px rgba(123, 104, 238, 0.4); /* subtle 3D glow */
+  animation: fadeInPopup 0.35s ease-out;
+}
+
+@keyframes fadeInPopup {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Text Wrapping */
+.overall-summary,
+.strengths-list li,
+.improvements-list li {
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* Sections inside popup */
+.section-card {
+  background: rgba(25, 25, 35, 0.85);
+  border-radius: 10px;
+  padding: 14px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.strengths-section .list-title { color: #00e676; font-weight: 600; }
+.improvements-section .list-title { color: #ff6b6b; font-weight: 600; }
+
+/* Tabs styling */
+.popup-tabs {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 20px;
+}
+.tab-button {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tab-active {
+  background: rgba(123, 104, 238, 0.25);
+  color: #fff;
+  border-bottom: 3px solid #7b68ee;
+}
+
+/* Centered button */
+.action-button {
+  background: linear-gradient(135deg, #7b68ee, #6a5acd);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 24px;
+  margin-top: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  transition: 0.3s ease;
+}
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(123, 104, 238, 0.45);
+}
+
+/* ---------- FIX 2: Right Column (Delivery Analysis) Overflow ---------- */
+.right-column .luxury-card.evaluation-panel {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 88vh;
+  padding-bottom: 20px;
+  background: rgba(15, 15, 25, 0.9);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5),
+              0 0 10px rgba(123, 104, 238, 0.35);
+}
+
+/* Ensure Strengths & Improve sections don't stack oddly */
+.evaluation-panel .card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: visible;
+}
+
+.your-strengths,
+.areas-to-improve {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.your-strengths .section-card,
+.areas-to-improve .section-card {
+  background: rgba(30, 30, 45, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 12px 18px;
+  color: #f5f5f5;
+  line-height: 1.5;
+}
+
+/* Fix scrollbar visuals */
+.right-column .luxury-card::-webkit-scrollbar {
+  width: 6px;
+}
+.right-column .luxury-card::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7b68ee, #6a5acd);
+  border-radius: 4px;
+}
+/* ---------- FIX: Delivery Tab Metrics Layout ---------- */
+
+.delivery-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 10px;
+}
+
+.delivery-metric {
+  background: rgba(25, 25, 35, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: 0.3s ease;
+}
+
+.delivery-metric:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(123, 104, 238, 0.3);
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 600;
+  color: #f5f5f5;
+}
+
+.metric-status {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.metric-status.excellent {
+  background: rgba(0, 255, 128, 0.2);
+  color: #00ff99;
+}
+.metric-status.good {
+  background: rgba(123, 104, 238, 0.25);
+  color: #a996ff;
+}
+.metric-status.fair {
+  background: rgba(255, 215, 0, 0.25);
+  color: #ffd700;
+}
+.metric-status.poor {
+  background: rgba(255, 99, 71, 0.25);
+  color: #ff6347;
+}
+
+.metric-progress-bar {
+  position: relative;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.metric-progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #6a5acd, #7b68ee, #8f7cff);
+  transition: width 0.5s ease;
+}
+
+/* Text alignment fixes */
+.delivery-tab .metric-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #f0f0f0;
+  text-transform: capitalize;
+}
+
+/* Responsive polish */
+@media (max-width: 1024px) {
+  .delivery-tab {
+    gap: 14px;
+  }
+  .delivery-metric {
+    padding: 10px 14px;
+  }
+}
+

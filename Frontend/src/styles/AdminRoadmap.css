@@ -1,0 +1,128 @@
+/* Dark Theme Base */
+body {
+  background: #111827;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  color: #fff;
+}
+
+/* Page Layout */
+.admin-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.admin-title {
+  font-size: 34px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #38bdf8;
+}
+
+.admin-subtext {
+  color: #cbd5e1;
+  margin-bottom: 30px;
+}
+
+/* Upload Card */
+.upload-card {
+  background: #1f2937;
+  padding: 25px;
+  border-radius: 14px;
+  margin-bottom: 30px;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.upload-card h3 {
+  margin-bottom: 18px;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.input-field,
+.file-input {
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background: #0f172a;
+  color: #fff;
+  font-size: 15px;
+}
+
+.upload-btn {
+  background: #22c55e;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.upload-btn:hover {
+  background: #16a34a;
+}
+
+/* Roadmap List */
+.list-card {
+  background: #1f2937;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.roadmap-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.roadmap-row {
+  background: #0f172a;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.view-link {
+  color: #38bdf8;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.view-link:hover {
+  color: #0ea5e9;
+}
+
+.empty-text {
+  color: #94a3b8;
+  margin-top: 10px;
+}
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.delete-btn {
+  background: #dc2626;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+}

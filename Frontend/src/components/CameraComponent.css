@@ -1,0 +1,656 @@
+/* Enhanced CameraComponent.css - Right Side Panel Layout */
+
+.camera-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: rgba(15, 15, 25, 0.8);
+  border-radius: 24px;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 0;
+}
+
+.camera-video-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px 0 0 16px;
+  overflow: hidden;
+}
+
+/* FIX FOR DIM VIDEO */
+.camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px 0 0 16px;
+  filter: brightness(1.1) contrast(1.1);
+  transform: scaleX(-1);
+}
+
+/* Right Side Panel */
+.camera-side-panel {
+  background: rgba(20, 20, 30, 0.95);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+}
+
+/* Panel Sections */
+.panel-section {
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.panel-section:last-child {
+  border-bottom: none;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.section-header .icon {
+  font-size: 16px;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.metric-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.metric-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.metric-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.metric-icon.excellent {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.metric-icon.good {
+  background: rgba(234, 179, 8, 0.2);
+  color: #eab308;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.metric-icon.poor {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.metric-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  min-width: 80px;
+}
+
+.metric-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  min-width: 40px;
+  text-align: right;
+}
+
+.metric-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0 12px;
+}
+
+.metric-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.metric-fill.excellent {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.metric-fill.good {
+  background: linear-gradient(90deg, #eab308, #ca8a04);
+}
+
+.metric-fill.poor {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+/* Warnings Section */
+.warnings-section {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.warnings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.warning-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  animation: slideInRight 0.3s ease;
+}
+
+.warning-item .icon {
+  color: #ef4444;
+  font-size: 14px;
+  margin-top: 1px;
+}
+
+.warning-content {
+  flex: 1;
+}
+
+.warning-message {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.warning-tip {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Enhanced Camera Controls */
+.camera-controls {
+  padding: 24px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 15, 25, 0.6);
+  grid-column: 1 / -1;
+}
+
+/* Status Indicators */
+.recording-status-indicator {
+  padding: 16px 24px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 15, 25, 0.4);
+  grid-column: 1 / -1;
+}
+
+.recording-pulse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #ff4444;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.pulse-dot {
+  width: 12px;
+  height: 12px;
+  background: #ff4444;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 20px rgba(255, 68, 68, 0.6);
+}
+
+.ready-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #00ff88;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ready-dot {
+  width: 12px;
+  height: 12px;
+  background: #00ff88;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+}
+
+@keyframes pulse {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Enhanced Error States */
+.camera-error-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.error-content {
+  text-align: center;
+  color: white;
+  padding: 40px;
+  background: rgba(23, 23, 23, 0.9);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.camera-status-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 16px 0 0 16px;
+}
+
+.status-message {
+  text-align: center;
+  background: rgba(23, 23, 23, 0.9);
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.camera-info {
+  padding: 12px 24px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  background: rgba(15, 15, 25, 0.4);
+  grid-column: 1 / -1;
+}
+
+/* Luxury Buttons */
+.luxury-btn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.luxury-btn.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.luxury-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.luxury-btn.danger {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.luxury-btn.danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+}
+
+.luxury-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .camera-wrapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: 400px auto;
+  }
+  
+  .camera-video-container {
+    border-radius: 16px 16px 0 0;
+    height: 400px;
+  }
+  
+  .camera-video {
+    border-radius: 16px 16px 0 0;
+  }
+  
+  .camera-side-panel {
+    height: auto;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .camera-status-overlay {
+    border-radius: 16px 16px 0 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .camera-video-container {
+    height: 350px;
+  }
+  
+  .camera-side-panel {
+    height: 300px;
+  }
+  
+  .panel-section {
+    padding: 15px;
+  }
+}
+/* Enhanced CameraComponent.css - With Visual Analytics */
+
+/* Add these new styles to your existing CameraComponent.css */
+
+/* Performance Trend Graph */
+.performance-trend {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.trend-indicator {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.trend-indicator.improving {
+  color: #22c55e;
+}
+
+.trend-indicator.declining {
+  color: #ef4444;
+}
+
+.trend-indicator.stable {
+  color: #eab308;
+}
+
+.trend-graph {
+  display: flex;
+  align-items: end;
+  gap: 3px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.trend-bar {
+  flex: 1;
+  border-radius: 2px;
+  min-height: 2px;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.trend-bar:hover {
+  opacity: 1;
+  transform: scaleY(1.1);
+}
+
+/* Confidence Meter */
+.confidence-meter {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.confidence-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.confidence-value {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.confidence-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ef4444, #eab308, #22c55e);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+}
+
+/* Positive Feedback State */
+.positive-feedback {
+  background: rgba(34, 197, 94, 0.1) !important;
+  border: 1px solid rgba(34, 197, 94, 0.2) !important;
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0);
+  }
+}
+
+/* Enhanced Metric Bars with Glow */
+.metric-fill.excellent {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+}
+
+.metric-fill.good {
+  background: linear-gradient(90deg, #eab308, #ca8a04);
+  box-shadow: 0 0 6px rgba(234, 179, 8, 0.3);
+}
+
+.metric-fill.poor {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.3);
+}
+
+/* Smooth hover effects */
+.metric-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  transform: translateX(2px);
+  transition: all 0.2s ease;
+}
+
+/* Enhanced warning items with severity colors */
+.warning-item[style*="background: rgba(239, 68, 68, 0.1)"] {
+  border-left: 3px solid #ef4444;
+}
+
+.warning-item .icon {
+  animation: gentlePulse 2s infinite;
+}
+
+@keyframes gentlePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Analytics Summary */
+.analytics-summary {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.analytics-summary .summary-header {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.analytics-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 10px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.stat-value {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Enhanced responsive design */
+@media (max-width: 968px) {
+  .performance-trend {
+    margin-top: 15px;
+  }
+  
+  .trend-graph {
+    height: 30px;
+  }
+  
+  .analytics-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .confidence-meter {
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+  
+  .performance-trend {
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+}

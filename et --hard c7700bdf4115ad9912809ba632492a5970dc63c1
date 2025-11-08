@@ -1,0 +1,272 @@
+[33mcommit 9f3157bb9ef6de4586266ea8cde625ac6387d8fb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Merge: c7700bd 84cb9d0
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 19:15:04 2025 +0530
+
+    Merge pull request #2 from sshreepadmavathi/main
+    
+     Added one click Job Applications, AI Mock Interview & UI Enhancements
+
+[33mcommit 84cb9d0190e0d17c3e1807e77d6a166a520e2e79[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 19:10:16 2025 +0530
+
+    Update server.js
+
+[33mcommit 2a56600d32a31c0374f59e89f8d420b4a3ad91d9[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 19:09:34 2025 +0530
+
+    Update applications.js
+
+[33mcommit 94664b7ec4597b62bc85ca3a22e66dcf842dacb1[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:59:59 2025 +0530
+
+    Update App.js
+
+[33mcommit 2cc2044bdc42cc9ad5835c38f41cd0d9bca4d73b[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:59:27 2025 +0530
+
+    Add files via upload
+
+[33mcommit 8d147dfb4bf25e47ad60a6aaef45545db09f5153[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:55:45 2025 +0530
+
+    Update speech.js
+
+[33mcommit 158cdb21f692ddf868ab586f71dedd1a0ad7a0d5[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:54:55 2025 +0530
+
+    Add files via upload
+
+[33mcommit 967148fb8dda9179b8a450447e1f10e302782a1e[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:52:32 2025 +0530
+
+    Update interviewQuestions.js
+
+[33mcommit cf435f2484900bc4e03ce5833b1d1453ee52c699[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:50:36 2025 +0530
+
+    Add files via upload
+
+[33mcommit 3a56094fbd58642a0e3014729f56a0f61cc98a68[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:49:19 2025 +0530
+
+    Create AnalysisPopup.js
+
+[33mcommit 59d3f00a59966510e14ce9c1a0aee7af5a4c8aec[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:47:18 2025 +0530
+
+    Update index.html
+
+[33mcommit 908aa59b350858267fc9bafa756804d319570618[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:46:22 2025 +0530
+
+    Add files via upload
+
+[33mcommit fd0bb2e354b54522987d7315315fa0b223835f50[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:39:23 2025 +0530
+
+    Add files via upload
+
+[33mcommit bc4c3193197cfefb52e91c17eefe0be39e81a3be[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:38:40 2025 +0530
+
+    Delete Frontend/public/ffmpeg-core.wasm
+
+[33mcommit c15535dd15f79c24cb6c71f8701b411309fed7c4[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:37:50 2025 +0530
+
+    Create ffmpeg-core.wasm
+
+[33mcommit 70b372e7bc5bc7c46c12f225a1542b72595c476e[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:36:30 2025 +0530
+
+    Create ffmpeg-core.js
+
+[33mcommit 4ce3efbbcd17e818ed45a2092ebafdf9c93ee6da[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:32:51 2025 +0530
+
+    Create mockInterview.js
+
+[33mcommit 51e70d371f5c379e8fe993eec06e81f03281ec31[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:31:38 2025 +0530
+
+    Create evaluateLocalAI.js
+
+[33mcommit 5e24524320d848c0b304d259baa5203892bb287b[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:30:08 2025 +0530
+
+    Update package.json
+
+[33mcommit a9a9de98f2abbb0aaa9fb60530317283e7310d66[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:29:27 2025 +0530
+
+    Update resume.js
+
+[33mcommit 52d53d1951870ad71e2ee03e4a5e3d0ed224382a[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:28:20 2025 +0530
+
+    Update auth.js
+
+[33mcommit eefa96f16a6ce7dfadb392ec8aafd3e83d7aa454[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:27:43 2025 +0530
+
+    Update user.js
+
+[33mcommit 933af64bd6cd1378190d38a6b0456a0b84007a28[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:26:32 2025 +0530
+
+    Update applications.js
+    
+    Update applications.js for easy apply
+
+[33mcommit 6ec2b5bc46c4f2eb62f853eab74a54e8ebab1cfa[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Tue Nov 4 18:25:31 2025 +0530
+
+    Update Application.js
+    
+    Update Application.js
+
+[33mcommit c7700bdf4115ad9912809ba632492a5970dc63c1[m
+Author: Sameera <167674263+kxnekin@users.noreply.github.com>
+Date:   Tue Nov 4 12:15:54 2025 +0530
+
+    Update .env
+
+[33mcommit 8774cb3db6e6cd61517fb65daf26488d4113cb33[m
+Author: kxnekin <bbsameer17@gmail.com>
+Date:   Tue Nov 4 12:09:52 2025 +0530
+
+    Remove .env file and update .gitignore
+
+[33mcommit 65f7c913f4eb6eec995c89118b091a04705bdf85[m
+Author: kxnekin <bbsameer17@gmail.com>
+Date:   Tue Nov 4 11:52:42 2025 +0530
+
+    Made reseume optmiser. Final ui of dashboard done.Made setitings page and also admins can see student details from now on.
+
+[33mcommit 4212a3e5d8b9413bd11bac73a0e5002136e35ce9[m
+Author: kxnekin <bbsameer17@gmail.com>
+Date:   Fri Oct 17 11:49:40 2025 +0530
+
+    Final Ui of home page
+
+[33mcommit 62d7d907e81985f0bccf9db3318aab48b9aa8b35[m
+Author: kxnekin <bbsameer17@gmail.com>
+Date:   Sun Sep 14 23:23:43 2025 +0530
+
+    Made job view card proper
+
+[33mcommit a3823fa301994ad562c03b01e4a480c2c10d8266[m
+Author: kxnekin <bbsameer17@gmail.com>
+Date:   Wed Aug 27 18:00:17 2025 +0530
+
+    Resolved merge conflicts
+
+[33mcommit 30b7eab65cf897f5e3299e0f6f76045ec1d7ff67[m
+Merge: 270c303 6ebffe2
+Author: kxnekin <bbsameer17@gmail.com>
+Date:   Wed Aug 27 17:17:49 2025 +0530
+
+    Resolved merge conflict in App.js
+
+[33mcommit 270c3034415e36a0fce74b60c43ac5e58007b0db[m
+Author: kxnekin <bbsameer17@gmail.com>
+Date:   Wed Aug 27 17:07:57 2025 +0530
+
+    Implemented coding (leetcode)playground
+
+[33mcommit 6ebffe2aec0fedfcc4fa6ab7f34315cc4ef2d95e[m
+Merge: fb50ea6 f8876f7
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Wed Aug 27 00:49:37 2025 +0530
+
+    Merge pull request #1 from sshreepadmavathi/main
+    
+    AI Interview Prep (HR/Tech) — voice Q&A, strict scoring
+
+[33mcommit f8876f7ce5a7a1bab1b1acc107cd5b2f4296e6c2[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Wed Aug 27 00:42:32 2025 +0530
+
+    Update server.js
+
+[33mcommit 58aaaa7b502128c90b38769b932027a413789ab7[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Wed Aug 27 00:41:58 2025 +0530
+
+    Create interview.js
+
+[33mcommit 9e7b48ae77cd03b489b0cb19972fd6a13c9395a3[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Wed Aug 27 00:40:53 2025 +0530
+
+    Create InterviewSession.js
+
+[33mcommit 002b5de63c847f1ef562257826bb1b735a8b4343[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Wed Aug 27 00:39:55 2025 +0530
+
+    Update StudentDashboard.js
+
+[33mcommit 7777068e72779275d50faa4546839deb3fa08dd0[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Wed Aug 27 00:39:11 2025 +0530
+
+    Update App.js
+
+[33mcommit c8a0fb2d52f04333902c02f147f9cb9a49540190[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Wed Aug 27 00:38:18 2025 +0530
+
+    Create interviewQuestions.js
+
+[33mcommit 05da804be2771a8ec03fb5cd653d5893d759e21e[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Wed Aug 27 00:37:27 2025 +0530
+
+    Create speech.js
+
+[33mcommit 9c7020870d572a4afbc449ce31f2559f24163ce1[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Wed Aug 27 00:36:25 2025 +0530
+
+    Create InterviewSession.js
+
+[33mcommit 321eb3f03a351ebec5c8363c20b12ee2d86520ac[m
+Author: shree padmavathi <sshreepadmavathi@gmail.com>
+Date:   Wed Aug 27 00:35:36 2025 +0530
+
+    Create InterviewLanding.js
+
+[33mcommit fb50ea63f70fbbbdde23d993c719c7d7f62f8d9d[m
+Author: kxnekin <bbsameer17@gmail.com>
+Date:   Tue Aug 26 13:49:34 2025 +0530
+
+    Remove .env and add to .gitignore
+
+[33mcommit 41ba9cd438e89966652a531b8d3ec158dd26bbee[m
+Author: kxnekin <bbsameer17@gmail.com>
+Date:   Tue Aug 26 13:41:58 2025 +0
