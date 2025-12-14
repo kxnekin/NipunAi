@@ -1,0 +1,90 @@
+.admin-announcements {
+  padding: 40px;
+  max-width: 800px;
+  margin: auto;
+  color: #000;
+}
+
+.admin-announcements h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #000;
+}
+
+.announcement-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.announcement-form input,
+.announcement-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #000;
+}
+
+.announcement-form button {
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.announcement-form button:hover {
+  background: #0056b3;
+}
+
+.announcements-list {
+  margin-top: 30px;
+}
+
+.announcement-item {
+  background: #ffffff; /* ✅ Light background for readability */
+  border-left: 5px solid #007bff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #000; /* ✅ Make all text black */
+}
+
+.announcement-item h3 {
+  margin: 0;
+  color: #000; /* ✅ Heading black */
+}
+
+.announcement-item p {
+  color: #000; /* ✅ Message black */
+}
+
+.announcement-item small {
+  color: #444; /* Slightly gray for timestamp */
+  display: block;
+  margin-top: 5px;
+}
+.announcement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-icon {
+  color: #e74c3c;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.delete-icon:hover {
+  color: #c0392b;
+  transform: scale(1.1);
+}

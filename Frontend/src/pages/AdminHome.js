@@ -7,6 +7,7 @@ const AdminHome = () => {
 
   return (
     <div className="admin-home-wrapper">
+      {/* ✅ Top Navbar */}
       <nav className="admin-navbar">
         <div className="admin-logo">🛠️ Admin Dashboard</div>
         <div className="admin-nav-links">
@@ -16,25 +17,36 @@ const AdminHome = () => {
           >
             View Job Cards
           </button>
+
           <button
             onClick={() => navigate("/admin-dashboard/roadmaps")}
             className="admin-nav-button"
           >
             View Roadmaps
           </button>
+
           <button
             onClick={() => navigate("/admin-dashboard/core-subjects")}
             className="admin-nav-button"
           >
             Core Subject Resources
           </button>
+
           <button
             onClick={() => navigate("/admin-dashboard/company-resources")}
             className="admin-nav-button"
           >
             Company-wise Resources
           </button>
-          {/* ✅ New Button */}
+
+          {/* ✅ NEW NAV BUTTON */}
+          <button
+            onClick={() => navigate("/admin-dashboard/announcements")}
+            className="admin-nav-button"
+          >
+            📢 Announcements
+          </button>
+
           <button
             onClick={() => navigate("/admin-dashboard/students")}
             className="admin-nav-button"
@@ -44,6 +56,7 @@ const AdminHome = () => {
         </div>
       </nav>
 
+      {/* ✅ Dashboard Cards */}
       <div className="admin-cards-container">
         <div
           className="admin-card"
@@ -77,13 +90,21 @@ const AdminHome = () => {
           <p>Post company-specific interview questions and prep guides.</p>
         </div>
 
-        {/* ✅ New Card */}
         <div
           className="admin-card"
           onClick={() => navigate("/admin-dashboard/students")}
         >
           <h2>👥 View Students</h2>
           <p>View list of all registered students and their profiles.</p>
+        </div>
+
+        {/* ✅ NEW ANNOUNCEMENT CARD */}
+        <div
+          className="admin-card"
+          onClick={() => navigate("/admin-dashboard/announcements")}
+        >
+          <h2>📢 Announcements</h2>
+          <p>Post important updates and notices for all students.</p>
         </div>
       </div>
     </div>

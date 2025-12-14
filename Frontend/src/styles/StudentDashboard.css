@@ -440,3 +440,63 @@ body {
     grid-template-columns: 1fr; /* Stack on mobile */
   }
 }
+/* --- Announcements Card --- */
+.announcement-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  padding: 24px;
+  color: var(--text-primary);
+  height: fit-content;
+  overflow-y: auto;
+}
+
+.announcement-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.announcement-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.announcement-card li {
+  background: #f9f9f9;
+  border-left: 4px solid var(--primary-color);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+  color: #000; /* ✅ Make text black */
+}
+
+.announcement-card li:hover {
+  transform: translateY(-2px);
+}
+
+.announcement-card li strong {
+  display: block;
+  color: #000; /* ✅ Black title */
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.announcement-card li p {
+  color: #222; /* ✅ Black message text */
+  font-size: 14px;
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.announcement-card li .date {
+  display: block;
+  font-size: 12px;
+  color: #555;
+  text-align: right;
+}

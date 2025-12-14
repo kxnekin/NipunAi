@@ -6,12 +6,16 @@
   min-height: 100vh;
 }
 
-h1 {
+/* ====== Heading ====== */
+.admin-students-wrapper h1 {
   font-size: 26px;
   color: #2c3e50;
   margin-bottom: 25px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
+/* ====== Search Bar ====== */
 .search-bar {
   width: 60%;
   max-width: 400px;
@@ -22,43 +26,93 @@ h1 {
   font-size: 16px;
   outline: none;
   transition: all 0.3s ease;
+  background-color: #fff;
+  color: #111;
+}
+
+.search-bar::placeholder {
+  color: #888;
 }
 
 .search-bar:focus {
   border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
 }
 
+/* ====== Student List Layout ====== */
 .student-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
+  gap: 18px;
+  margin-top: 10px;
 }
 
+/* ====== Individual Student Card ====== */
 .student-card {
-  background: white;
+  background: #ffffff;
   padding: 20px 40px;
   border-radius: 12px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
   cursor: default;
-  transition: all 0.2s ease-in-out;
-  color: #1a1a1a; /* ✅ Darker text color for better readability */
+  transition: all 0.25s ease-in-out;
+  color: #1a1a1a;
+  width: 280px;
+  text-align: left;
+  border: 1px solid transparent;
 }
 
+.student-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+  border-color: #007bff3a;
+}
+
+/* ====== Card Text Styling ====== */
 .student-card h3 {
   font-size: 18px;
   font-weight: 600;
-  color: #111; /* ✅ Even darker for the name */
+  color: #0f172a;
   margin-bottom: 8px;
+  letter-spacing: 0.3px;
 }
 
 .student-card p {
   font-size: 15px;
-  color: #222; /* ✅ Consistent dark gray for info text */
-  margin: 4px 0;
+  color: #222;
+  margin: 5px 0;
+  line-height: 1.4;
 }
 
 .student-card strong {
-  color: #000; /* ✅ Make labels stand out */
+  color: #000;
+  font-weight: 600;
+}
+
+/* ====== Empty State ====== */
+.student-list p {
+  color: #555;
+  font-size: 16px;
+  margin-top: 40px;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+  .search-bar {
+    width: 90%;
+  }
+
+  .student-card {
+    width: 90%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .student-card h3 {
+    font-size: 17px;
+  }
+
+  .student-card p {
+    font-size: 14px;
+  }
 }

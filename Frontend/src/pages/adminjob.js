@@ -1,100 +1,131 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Eye, Trash2, FileDown } from "lucide-react";
-import "../styles/AdminDashboard.css";
+import "../styles/CreateJob.css";
 
-function AdminJob() {
-  const [students, setStudents] = useState([]);
+function CreateJob() {
+  const [formData, setFormData] = useState({
+    title: "",
+    company: "",
+    ctc: "",
+    location: "",
+    description: "",
+    eligibility: "",
+    date: "",
+  });
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/profile/all")
-      .then((res) => setStudents(res.data))
-      .catch((err) => console.error("Error fetching students:", err));
-  }, []);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const handleDelete = async (email) => {
-    if (!window.confirm("Are you sure you want to delete this student?")) return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      await axios.delete(`http://localhost:5000/api/profile/delete/${email}`);
-      setStudents(students.filter((s) => s.email !== email));
-      alert("✅ Student deleted successfully!");
+      await axios.post("http://localhost:5000/api/jobs", formData);
+      alert("✅ Job posted successfully!");
+      setFormData({
+        title: "",
+        company: "",
+        ctc: "",
+        location: "",
+        description: "",
+        eligibility: "",
+        date: "",
+      });
     } catch (err) {
-      alert("❌ Failed to delete student.");
+      alert("❌ Failed to post job.");
     }
   };
 
   return (
-    <div className="admin-dashboard-wrapper">
-      <div className="admin-dashboard-header">
-        <h1>👨‍💼 Admin Panel — Student Details</h1>
-        <p>Manage all registered students and their resumes.</p>
-      </div>
+    <div className="createjob-container">
+      <div className="createjob-card">
+        <h2 className="createjob-title">🚀 Post a New Job</h2>
+        <form onSubmit={handleSubmit} className="createjob-form">
+          <div className="form-group">
+            <label>Job Title</label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="e.g., Software Engineer"
+              required
+            />
+          </div>
 
-      <div className="admin-dashboard-content">
-        {students.length === 0 ? (
-          <p className="no-data">No students found.</p>
-        ) : (
-          <table className="student-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Branch</th>
-                <th>Email</th>
-                <th>USN</th>
-                <th>Work Experience</th>
-                <th>About</th>
-                <th>Resume</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {students.map((s, idx) => (
-                <tr key={idx}>
-                  <td>{s.name}</td>
-                  <td>{s.branch}</td>
-                  <td>{s.email}</td>
-                  <td>{s.usn}</td>
-                  <td>{s.workExperience || "—"}</td>
-                  <td>{s.details || "—"}</td>
-                  <td>
-                    {s.resumeUrl ? (
-                      <a
-                        href={`http://localhost:5000/${s.resumeUrl}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Eye size={18} /> View
-                      </a>
-                    ) : (
-                      "No Resume"
-                    )}
-                  </td>
-                  <td>
-                    {s.resumeUrl && (
-                      <a
-                        href={`http://localhost:5000/${s.resumeUrl}`}
-                        download
-                        className="download-icon"
-                      >
-                        <FileDown size={18} />
-                      </a>
-                    )}
-                    <button
-                      className="delete-icon"
-                      onClick={() => handleDelete(s.email)}
-                    >
-                      <Trash2 size={18} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+          <div className="form-group">
+            <label>Company Name</label>
+            <input
+              type="text"
+              name="company"
+              value={formData.company}
+              onChange={handleChange}
+              placeholder="e.g., Infosys"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>CTC (e.g., ₹6 LPA)</label>
+            <input
+              type="text"
+              name="ctc"
+              value={formData.ctc}
+              onChange={handleChange}
+              placeholder="e.g., ₹6 LPA"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Job Location</label>
+            <input
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+              placeholder="e.g., Bangalore"
+            />
+          </div>
+
+          <div className="form-group full">
+            <label>Job Description</label>
+            <textarea
+              name="description"
+              rows="3"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Describe the job role..."
+            />
+          </div>
+
+          <div className="form-group full">
+            <label>Eligibility Criteria</label>
+            <textarea
+              name="eligibility"
+              rows="2"
+              value={formData.eligibility}
+              onChange={handleChange}
+              placeholder="e.g., B.Tech CSE, 2025 batch"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Application Deadline</label>
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button type="submit" className="submit-btn">
+            Post Job
+          </button>
+        </form>
       </div>
     </div>
   );
 }
 
-export default AdminJob;
+export default CreateJob;

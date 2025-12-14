@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
-// Define resume sub-schema
+// Define resume sub-schema (no _id for cleaner storage)
 const resumeSchema = new mongoose.Schema({
   data: Buffer,
   contentType: String,
-}, { _id: false }); // _id false so MongoDB doesn’t create an ID for each resume object
+  uploadedAt: { type: Date, default: Date.now },
+}, { _id: false });
 
+// Define main User schema
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -23,22 +25,27 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: 'user', // can be 'student' or 'admin'
+    enum: ['student', 'admin'],
+    default: 'student',
   },
   usn: {
     type: String,
-    required: false,
   },
   branch: {
     type: String,
-    required: false,
   },
-
-  // ✅ Resume storage (PDF in DB)
-  resume: resumeSchema,
+  cgpa: {
+    type: String,
+    default: '',
+  },
+  phone: {
+    type: String,
+    default: '',
+  },
+  resume: resumeSchema, // Embedded resume schema
 }, { timestamps: true });
 
-// Hash password before saving
+// ✅ Hash password before saving
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   try {
@@ -46,11 +53,11 @@ userSchema.pre('save', async function (next) {
     this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (err) {
-    return next(err);
+    next(err);
   }
 });
 
-// Password comparison method
+// ✅ Compare password method
 userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };

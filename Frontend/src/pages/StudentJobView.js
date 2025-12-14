@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import "../styles/StudentJobView.css"
+// ✅ Import the new, beautiful CSS file
+import "../styles/StudentJobView.css"; 
 
 const StudentJobView = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [appliedJobs, setAppliedJobs] = useState(new Set());
 
+  // This logic is all correct (no changes needed)
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -21,6 +23,7 @@ const StudentJobView = () => {
     fetchJobs();
   }, []);
 
+  // This logic is all correct (no changes needed)
   const handleEasyApply = async (jobId) => {
     try {
       const studentEmail = localStorage.getItem("studentEmail");
@@ -44,37 +47,53 @@ const StudentJobView = () => {
     }
   };
 
+  // The return() is updated with new "beautiful" class names
   return (
-    <div className="job-wrapper">
-      <h1 className="job-title">🚀 Job Opportunities</h1>
-      <p className="job-subtitle">
-        Browse and apply using your resume
-      </p>
+    <div className="jobs-dashboard-content"> {/* Changed container class */}
+      <div className="jobs-page-header">
+        <h1>🚀 Job Opportunities</h1>
+        <p>Browse and apply using your resume</p>
+      </div>
 
       {loading ? (
-        <p className="loading-text">Loading jobs...</p>
+        <p className="loading-message">Loading amazing jobs...</p>
       ) : jobs.length === 0 ? (
-        <p className="no-jobs">No jobs available right now!</p>
+        <p className="loading-message">No jobs available right now!</p>
       ) : (
-        <div className="job-grid scrollable">
+        <div className="jobs-grid">
           {jobs.map((job) => (
-            <div key={job._id} className="job-card">
-              <div className="job-header">
-                <h2>{job.title}</h2>
-                <span className="company">{job.company}</span>
+            <div key={job._id} className="job-card-beautiful"> {/* Changed card class */}
+              <div className="job-card-header-beautiful">
+                <h3 className="job-title-beautiful">{job.title}</h3>
+                <span className="job-location-beautiful">
+                  {job.location || "Remote"}
+                </span>
               </div>
+              <p className="job-company-beautiful">{job.company}</p>
 
-              <div className="job-info">
-                <p><span>💰 CTC:</span> {job.ctc}</p>
-                <p><span>📍 Location:</span> {job.location || "Remote"}</p>
-                {job.eligibility && <p><span>🎓 Eligibility:</span> {job.eligibility}</p>}
-                {job.deadline && <p><span>⏰ Deadline:</span> {new Date(job.deadline).toLocaleDateString()}</p>}
+              <div className="job-details-beautiful">
+                <p>
+                  <strong>💰 CTC:</strong> {job.ctc}
+                </p>
+                {job.eligibility && (
+                  <p>
+                    <strong>🎓 Eligibility:</strong> {job.eligibility}
+                  </p>
+                )}
+                {job.deadline && (
+                  <p>
+                    <strong>⏰ Deadline:</strong>{" "}
+                    {new Date(job.deadline).toLocaleDateString()}
+                  </p>
+                )}
+                <p className="job-description-beautiful">{job.description}</p>
               </div>
-
-              <p className="job-desc">{job.description}</p>
 
               <button
-                className={`apply-btn ${appliedJobs.has(job._id) ? "applied" : ""}`}
+                // Use the new class, but keep all your logic
+                className={`job-apply-button-beautiful ${
+                  appliedJobs.has(job._id) ? "applied" : ""
+                }`}
                 onClick={() => handleEasyApply(job._id)}
                 disabled={appliedJobs.has(job._id)}
               >

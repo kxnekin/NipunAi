@@ -1,10 +1,10 @@
 /* File: backend/models/CompanyResource.js */
 
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const CompanyResourceSchema = new mongoose.Schema({
   title: { type: String, required: true },
   fileUrl: { type: String, required: true },
 });
 
-export default mongoose.model("CompanyResource", CompanyResourceSchema);
+module.exports = mongoose.model("CompanyResource", CompanyResourceSchema);

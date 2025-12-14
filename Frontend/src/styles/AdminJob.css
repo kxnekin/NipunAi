@@ -1,0 +1,110 @@
+/* ===== Container ===== */
+.createjob-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  font-family: "Poppins", sans-serif;
+  padding: 3rem;
+  color: #f8fafc;
+}
+
+/* ===== Card ===== */
+.createjob-card {
+  background: rgba(30, 41, 59, 0.95);
+  width: 700px; /* wider card */
+  padding: 2.5rem 3rem;
+  border-radius: 20px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+}
+
+/* ===== Heading ===== */
+.createjob-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #38bdf8;
+}
+
+/* ===== Form Layout ===== */
+.createjob-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem 1.5rem;
+}
+
+/* Each input box group */
+.form-group {
+  flex: 1 1 calc(50% - 1rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full {
+  flex: 1 1 100%;
+}
+
+label {
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  color: #cbd5e1;
+}
+
+/* Input + Textarea Fields */
+input,
+textarea {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  color: #f8fafc;
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.2s;
+  resize: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.3);
+}
+
+/* ===== Submit Button ===== */
+.submit-btn {
+  background: #22c55e;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.9rem 1.5rem;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.submit-btn:hover {
+  background: #16a34a;
+  transform: scale(1.02);
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 900px) {
+  .createjob-card {
+    width: 90%;
+    padding: 2rem;
+  }
+
+  .form-group {
+    flex: 1 1 100%;
+  }
+
+  .createjob-title {
+    font-size: 1.5rem;
+  }
+}

@@ -1,159 +1,183 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import "../styles/CreateJob.css"; // We will create this new CSS file
 
-const CreateJob = () => {
-  const navigate = useNavigate();
-  const [jobData, setJobData] = useState({
-    title: '',
-    company: '',
-    ctc: '',            // ✅ Added CTC field in state
-    location: '',
-    description: '',
-    eligibility: '',
-    deadline: '',
+function CreateJob() {
+  const [formData, setFormData] = useState({
+    title: "",
+    company: "",
+    ctc: "",
+    location: "",
+    description: "",
+    eligibility: "",
+    deadline: "", // Renamed from 'date' for clarity
   });
 
   const handleChange = (e) => {
-    setJobData({ ...jobData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post('http://localhost:5000/api/jobs', jobData);
-
-      if (response.status === 200 || response.status === 201) {
-        alert('Job posted successfully!');
-        navigate('/admin-dashboard');
-      } else {
-        alert('Failed to post job.');
-      }
-    } catch (error) {
-      console.error('Error posting job:', error);
-      alert('Something went wrong while posting the job.');
+      await axios.post("http://localhost:5000/api/jobs", formData);
+      alert("✅ Job posted successfully!");
+      // Clear the form
+      setFormData({
+        title: "",
+        company: "",
+        ctc: "",
+        location: "",
+        description: "",
+        eligibility: "",
+        deadline: "",
+      });
+    } catch (err) {
+      alert("❌ Failed to post job.");
     }
   };
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>Post a New Job</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <input
-          type="text"
-          name="title"
-          placeholder="Job Title"
-          value={jobData.title}
-          onChange={handleChange}
-          style={styles.input}
-          required
-        />
-        <input
-          type="text"
-          name="company"
-          placeholder="Company Name"
-          value={jobData.company}
-          onChange={handleChange}
-          style={styles.input}
-          required
-        />
-        <input
-          type="text"
-          name="ctc"
-          placeholder="CTC (e.g., ₹6 LPA)"
-          value={jobData.ctc}
-          onChange={handleChange}
-          style={styles.input}
-        />
-        <input
-          type="text"
-          name="location"
-          placeholder="Job Location"
-          value={jobData.location}
-          onChange={handleChange}
-          style={styles.input}
-        />
-        <textarea
-          name="description"
-          placeholder="Job Description"
-          value={jobData.description}
-          onChange={handleChange}
-          style={styles.textarea}
-          required
-        />
-        <textarea
-          name="eligibility"
-          placeholder="Eligibility Criteria"
-          value={jobData.eligibility}
-          onChange={handleChange}
-          style={styles.textarea}
-        />
-        <input
-          type="date"
-          name="deadline"
-          placeholder="Application Deadline"
-          value={jobData.deadline}
-          onChange={handleChange}
-          style={styles.input}
-        />
-        <button type="submit" style={styles.button}>Post Job</button>
-      </form>
+    // This wrapper fits inside your main dashboard layout
+    <div className="admin-page-content">
+      {/* A standard header, just like the student pages */}
+      <div className="admin-page-header">
+        <h1>Post a New Job</h1>
+        <p>Fill out the form below to publish a new job opportunity for students.</p>
+      </div>
+
+      {/* The main form card */}
+      <div className="form-card">
+        <form onSubmit={handleSubmit} className="create-job-form">
+          {/* Form fields are now in a responsive grid */}
+          <div className="form-grid">
+            {/* Job Title */}
+            <div className="form-group">
+              <label className="form-label" htmlFor="title">
+                Job Title
+              </label>
+              <input
+                className="form-input"
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                placeholder="e.g., Software Engineer"
+                required
+              />
+            </div>
+
+            {/* Company Name */}
+            <div className="form-group">
+              <label className="form-label" htmlFor="company">
+                Company Name
+              </label>
+              <input
+                className="form-input"
+                type="text"
+                id="company"
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+                placeholder="e.g., Infosys"
+                required
+              />
+            </div>
+
+            {/* CTC */}
+            <div className="form-group">
+              <label className="form-label" htmlFor="ctc">
+                CTC (e.g., ₹6 LPA)
+              </label>
+              <input
+                className="form-input"
+                type="text"
+                id="ctc"
+                name="ctc"
+                value={formData.ctc}
+                onChange={handleChange}
+                placeholder="e.g., ₹6 LPA"
+              />
+            </div>
+
+            {/* Job Location */}
+            <div className="form-group">
+              <label className="form-label" htmlFor="location">
+                Job Location
+              </label>
+              <input
+                className="form-input"
+                type="text"
+                id="location"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                placeholder="e.g., Bangalore / Remote"
+              />
+            </div>
+
+            {/* Job Description (Full Width) */}
+            <div className="form-group full-span">
+              <label className="form-label" htmlFor="description">
+                Job Description
+              </label>
+              <textarea
+                className="form-textarea"
+                id="description"
+                name="description"
+                rows="4"
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Describe the job role, responsibilities, etc."
+              />
+            </div>
+
+            {/* Eligibility (Full Width) */}
+            <div className="form-group full-span">
+              <label className="form-label" htmlFor="eligibility">
+                Eligibility Criteria
+              </label>
+              <textarea
+                className="form-textarea"
+                id="eligibility"
+                name="eligibility"
+                rows="3"
+                value={formData.eligibility}
+                onChange={handleChange}
+                placeholder="e.g., B.Tech CSE, 2025 batch, 7+ CGPA"
+              />
+            </div>
+
+            {/* Application Deadline */}
+            <div className="form-group">
+              <label className="form-label" htmlFor="deadline">
+                Application Deadline
+              </label>
+              <input
+                className="form-input"
+                type="date"
+                id="deadline"
+                name="deadline" // Renamed from 'date'
+                value={formData.deadline}
+                onChange={handleChange}
+              />
+            </div>
+
+            {/* Empty group for alignment (optional) */}
+            <div className="form-group"></div>
+
+            {/* Submit Button (Full Width) */}
+            <div className="form-group full-span">
+              <button type="submit" className="form-submit-button">
+                🚀 Post Job
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    maxWidth: '600px',
-    margin: '20px auto',
-    background: '#535389ff',
-    padding: '30px',
-    borderRadius: '12px',
-    color: 'white',
-    boxShadow: '0 0 12px rgba(120, 97, 97, 0.1)',
-  },
-  heading: {
-    textAlign: 'center',
-    marginBottom: '20px',
-    fontSize: '26px',
-    color: '#fff',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  input: {
-    padding: '10px 15px',
-    margin: '10px 0',
-    borderRadius: '8px',
-    border: 'none',
-    backgroundColor: '#2b2b3c',
-    color: 'white',
-    fontSize: '16px',
-  },
-  textarea: {
-    padding: '12px 15px',
-    margin: '10px 0',
-    borderRadius: '8px',
-    border: 'none',
-    backgroundColor: '#2b2b3c',
-    color: 'white',
-    fontSize: '16px',
-    minHeight: '100px',
-    resize: 'vertical',
-  },
-  button: {
-    marginTop: '20px',
-    padding: '12px',
-    borderRadius: '8px',
-    backgroundColor: '#4caf50',
-    border: 'none',
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: '16px',
-    cursor: 'pointer',
-  },
-};
+}
 
 export default CreateJob;

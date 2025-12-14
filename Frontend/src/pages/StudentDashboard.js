@@ -15,11 +15,10 @@ function StudentDashboard() {
     usn: "Not Available",
     branch: "Computer Science",
     email: "",
-    cgpa: "Not Provided",
-    phone: "Not Provided"
   });
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [resume, setResume] = useState(null);
+  const [announcements, setAnnouncements] = useState([]);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,16 +29,12 @@ function StudentDashboard() {
     const email = localStorage.getItem("studentEmail");
     const usn = localStorage.getItem("studentUSN");
     const branch = localStorage.getItem("studentBranch");
-    const savedCgpa = localStorage.getItem("studentCGPA");
-    const savedPhone = localStorage.getItem("studentPhone");
 
     setStudent({
       name: name || "Student",
       usn: usn || "Not Available",
       email: email || "Not Available",
       branch: branch || "Computer Science",
-      cgpa: savedCgpa || "Not Provided",
-      phone: savedPhone || "Not Provided"
     });
 
     if (email) {
@@ -56,6 +51,12 @@ function StudentDashboard() {
         })
         .catch(() => {}); // No resume yet
     }
+
+    // ✅ Fetch latest announcements from backend (admin posted)
+    axios
+      .get("http://localhost:5000/api/announcements")
+      .then((res) => setAnnouncements(res.data || []))
+      .catch(() => setAnnouncements([]));
   }, []);
 
   const handleExplore = (key) => {
@@ -146,28 +147,28 @@ function StudentDashboard() {
           <h2>Dashboard</h2>
         </div>
         <div className="sidebar-nav">
-          <div 
+          <div
             className={`sidebar-nav-item ${isSidebarItemActive("/student-dashboard") ? "active" : ""}`}
             onClick={() => navigate("/student-dashboard")}
           >
             <span>🏠</span>
             <span>Home</span>
           </div>
-          <div 
+          <div
             className={`sidebar-nav-item ${isSidebarItemActive("/my-applications") ? "active" : ""}`}
             onClick={() => navigate("/my-applications")}
           >
             <span>📋</span>
             <span>My Applications</span>
           </div>
-          <div 
+          <div
             className={`sidebar-nav-item ${isSidebarItemActive("/resume-optimiser") ? "active" : ""}`}
             onClick={() => navigate("/resume-optimiser")}
           >
             <span>✨</span>
             <span>Resume Optimiser</span>
           </div>
-          <div 
+          <div
             className={`sidebar-nav-item ${isSidebarItemActive("/profile") ? "active" : ""}`}
             onClick={() => navigate("/profile")}
           >
@@ -183,7 +184,7 @@ function StudentDashboard() {
         <div className="dashboard-header">
           <div className="header-welcome">
             <h1>Welcome back, {student.name}!</h1>
-            <p>Here's your overview and access to all features.</p>
+            <p>Here’s your overview and the latest updates.</p>
           </div>
           <div className="header-profile">
             <div className="profile-icon-wrapper" onClick={toggleProfileMenu}>
@@ -204,8 +205,26 @@ function StudentDashboard() {
 
         {/* Dashboard Content */}
         <div className="dashboard-content">
-          <div className="content-grid">
-            {/* Profile Card */}
+          <div className="content-grid swapped-layout">
+            {/* Left Side — Announcements */}
+            <div className="announcement-card">
+              <h3>📢 Important Announcements</h3>
+              {announcements.length === 0 ? (
+                <p>No new announcements right now.</p>
+              ) : (
+                <ul>
+                  {announcements.map((a, i) => (
+                    <li key={i}>
+                      <strong>{a.title}</strong>
+                      <p>{a.message}</p>
+                      <span className="date">{new Date(a.createdAt).toLocaleString()}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            {/* Right Side — Profile */}
             <div className="profile-card">
               <div className="profile-card-header">
                 <div className="profile-card-avatar">👤</div>
@@ -217,8 +236,6 @@ function StudentDashboard() {
               <div className="profile-card-details">
                 <p><b>USN:</b> {student.usn}</p>
                 <p><b>Branch:</b> {student.branch}</p>
-                <p><b>CGPA:</b> {student.cgpa}</p>
-                <p><b>Phone:</b> {student.phone}</p>
               </div>
               <div className="profile-card-resume">
                 {resume ? (
@@ -229,12 +246,6 @@ function StudentDashboard() {
                   <p>No resume uploaded</p>
                 )}
               </div>
-            </div>
-
-            {/* Statistics Dashboard Placeholder */}
-            <div className="placeholder-card">
-              <h3>📊 Statistics Dashboard</h3>
-              <p>Coming soon — visualize your progress, skills, and performance here.</p>
             </div>
           </div>
 

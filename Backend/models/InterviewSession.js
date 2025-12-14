@@ -1,18 +1,45 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const ItemSchema = new mongoose.Schema({
+const answerSchema = new mongoose.Schema({
   question: String,
   answer: String,
+  audioUrl: String,
+  timestamp: Date,
   score: Number,
-  feedback: String,
-}, { _id: false });
-
-const InterviewSessionSchema = new mongoose.Schema({
-  email: { type: String, required: true },
-  type: { type: String, enum: ["hr","tech"], required: true },
-  totalScore: { type: Number, default: 0 },
-  items: [ItemSchema],
-  createdAt: { type: Date, default: Date.now }
+  feedback: String
 });
 
-module.exports = mongoose.model("InterviewSession", InterviewSessionSchema);
+const interviewSessionSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  interviewType: {
+    type: String,
+    required: true,
+    enum: ['hr', 'technical', 'ai-ml', 'data-science']
+  },
+  questions: [String],
+  answers: [answerSchema],
+  currentQuestion: {
+    type: Number,
+    default: 0
+  },
+  status: {
+    type: String,
+    enum: ['active', 'completed', 'cancelled'],
+    default: 'active'
+  },
+  startTime: Date,
+  endTime: Date,
+  overallScore: Number,
+  proctoringEvents: [{
+    type: String,
+    timestamp: Date
+  }]
+}, {
+  timestamps: true
+});
+
+module.exports = mongoose.model('InterviewSession', interviewSessionSchema);

@@ -4,16 +4,10 @@
   padding: 32px 48px;
   background-color: var(--bg-color);
   animation: fadeIn 0.5s ease-in-out;
-  padding-bottom: 6rem; /* Add space at the bottom */
-  overflow-x: hidden; /* Prevent horizontal scroll */
-
-  /* REMOVED min-height: 100vh;
-    REMOVED overflow-y: auto; 
-  */
-
-  /* ADDED these two lines */
-  flex: 1; /* Helps wrapper fill space if parent is flex */
-  height: auto; /* Allows wrapper to grow with content */
+  padding-bottom: 6rem;
+  overflow-x: hidden;
+  flex: 1;
+  height: auto;
 }
 
 @keyframes fadeIn {
@@ -157,24 +151,33 @@
   margin-top: 16px;
 }
 
-/* --- Loading Spinner --- */
+/* --- ✅ Clean and Proper Loading Spinner --- */
 .loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
   text-align: center;
-  padding: 40px;
-  color: var(--text-secondary);
+  color: #222;
+  animation: fadeIn 0.4s ease-in;
 }
 
 .loading-spinner .icon {
+  animation: spin 1.2s linear infinite;
   color: var(--primary-color);
-  animation: spin 1.5s linear infinite;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 12px;
 }
 
 .loading-spinner p {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
-  margin-top: 16px;
+  color: #444;
 }
 
+/* --- Smooth Rotation Animation --- */
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -300,7 +303,7 @@
   background-color: var(--primary-color);
 }
 .result-card.keywords-unnecessary .card-icon {
-  background-color: #8e44ad; /* A new color (purple) */
+  background-color: #8e44ad;
 }
 
 .result-card p {
@@ -349,7 +352,7 @@
   content: "»";
   margin-right: 8px;
   font-weight: 700;
-  color: #8e44ad; /* Match the icon color */
+  color: #8e44ad;
 }
 
 /* Responsive */
@@ -386,7 +389,6 @@
 }
 
 /* STYLES for dropdown and file upload */
-
 .input-group select {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -395,14 +397,12 @@
   border-radius: 8px;
   box-sizing: border-box;
   background-color: #fff;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27292.4%27%20height%3D%27292.4%27%3E%3Cpath%20fill%3D%27%23007CB2%27%20d%3D%27M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-13%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2013l128%20128c3.6%203.6%207.8%205.4%s9.4-1.8%2013-5.4l128-128c3.6-3.6%205.4-7.8%205.4-13%200-4.8-1.8-9.2-5.4-12.8z%27%2F%3E%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27292.4%27%20height%3D%27292.4%27%3E%3Cpath%20fill%3D%27%23007CB2%27%20d%3D%27M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-13%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2013l128%20128c3.6%203.6%207.8%205.4%2012.6%205.4s9.4-1.8%2013-5.4l128-128c3.6-3.6%205.4-7.8%205.4-13%200-4.8-1.8-9.2-5.4-12.8z%27%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 0.65em auto;
-  padding-right: 2.5rem; /* Make space for the arrow */
+  padding-right: 2.5rem;
 }
 
 .file-upload-label {
@@ -427,7 +427,6 @@
 
 .file-upload-label span {
   color: #555;
-  /* Truncate long file names */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
